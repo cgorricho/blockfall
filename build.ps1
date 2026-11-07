@@ -1,0 +1,29 @@
+# Builds all three BLOCKFALL editions into .\bin
+$ErrorActionPreference = 'Stop'
+$root = $PSScriptRoot
+$bin = Join-Path $root 'bin'
+New-Item -ItemType Directory -Force $bin | Out-Null
+
+# Refresh PATH so freshly installed toolchains are visible in this shell
+$env:Path = [Environment]::GetEnvironmentVariable('Path', 'Machine') + ';' + [Environment]::GetEnvironmentVariable('Path', 'User')
+
+Write-Host '== Go' -ForegroundColor Cyan
+Push-Location (Join-Path $root 'go')
+go mod tidy
+go build -o (Join-Path $bin 'blockfall-go.exe') .
+Pop-Location
+
+Write-Host '== C#' -ForegroundColor Cyan
+Push-Location (Join-Path $root 'csharp')
+dotnet publish -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true -o (Join-Path $root 'csharp\out') --nologo -v q
+Copy-Item (Join-Path $root 'csharp\out\blockfall.exe') (Join-Path $bin 'blockfall-cs.exe') -Force
+Pop-Location
+
+Write-Host '== Rust' -ForegroundColor Cyan
+Push-Location (Join-Path $root 'rust')
+cargo build --release
+Copy-Item (Join-Path $root 'rust\target\release\blockfall.exe') (Join-Path $bin 'blockfall-rs.exe') -Force
+Pop-Location
+
+Write-Host "Done. Binaries in $bin" -ForegroundColor Green
+Get-ChildItem $bin | Format-Table Name, Length
