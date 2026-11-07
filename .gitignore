@@ -1,0 +1,6 @@
+# build outputs
+bin/
+csharp/bin/
+csharp/obj/
+csharp/out/
+rust/target/
