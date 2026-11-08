@@ -169,6 +169,8 @@ Turbo is where the language differences really show: watch **Pieces /s** and **P
 
 In the dashboard, **R** resets the averages and peaks, and **Q** quits.
 
+Press **Tab** in the dashboard to see **line charts** of every metric over about the last minute, with one coloured line per game: Go cyan, C# magenta, Rust orange. **←/→** turns the page (ten charts on two pages in the standard window), and **Tab** goes back to the table. Where two lines cross in the same spot, only one colour can show.
+
 Leave out `-Seed 42` to get a random game each time. Add `-Turbo` to start at full speed.
 
 ---

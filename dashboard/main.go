@@ -162,11 +162,13 @@ type tracker struct {
 	history                 []float64
 	faultsPS, ioKBps        float64
 	piecesPS, fps, perCPU   float64
+	series                  [][]float64 // per chart metric, oldest first (see chart.go)
 }
 
 func (t *tracker) resetStats() {
 	t.cpuPeak, t.cpuSum, t.cpuN = 0, 0, 0
 	t.history = nil
+	t.series = nil
 	t.hasPrev = false
 }
 
@@ -220,6 +222,7 @@ func (t *tracker) update(threads map[uint32]uint32) {
 		if cpuDelta > 0.001 {
 			t.perCPU = pieces / cpuDelta
 		}
+		t.record()
 	}
 	t.hasPrev = true
 }
@@ -330,7 +333,7 @@ func draw(s tcell.Screen, ts []*tracker, self *tracker, started time.Time) {
 	worst := base.Foreground(pc(9)).Bold(true)
 
 	put(s, 1, 0, "BLOCKFALL · resource dashboard", bold)
-	put(s, 1, 1, fmt.Sprintf("updates every second · running %s · R reset · Q quit", time.Since(started).Round(time.Second)), dim)
+	put(s, 1, 1, fmt.Sprintf("updates every second · running %s · Tab charts · R reset · Q quit", time.Since(started).Round(time.Second)), dim)
 
 	y := 3
 	for i, t := range ts {
@@ -443,13 +446,21 @@ func main() {
 		}
 	}()
 
+	charts, page := false, 0 // Tab switches between the table and the charts
+	redraw := func() {
+		if charts {
+			page = drawCharts(s, ts, page, started)
+		} else {
+			draw(s, ts, self, started)
+		}
+	}
 	refresh := func() {
 		threads := threadCounts()
 		for _, t := range ts {
 			t.update(threads)
 		}
 		self.updateSelf()
-		draw(s, ts, self, started)
+		redraw()
 	}
 	refresh()
 	ticker := time.NewTicker(time.Second)
@@ -460,7 +471,7 @@ func main() {
 			switch e := ev.(type) {
 			case *tcell.EventResize:
 				s.Sync()
-				draw(s, ts, self, started)
+				redraw()
 			case *tcell.EventKey:
 				switch {
 				case e.Key() == tcell.KeyEscape || e.Key() == tcell.KeyCtrlC || e.Rune() == 'q' || e.Rune() == 'Q':
@@ -470,7 +481,16 @@ func main() {
 						t.resetStats()
 					}
 					started = time.Now()
-					draw(s, ts, self, started)
+					redraw()
+				case e.Key() == tcell.KeyTab || e.Rune() == 'g' || e.Rune() == 'G':
+					charts = !charts
+					redraw()
+				case charts && e.Key() == tcell.KeyRight:
+					page++
+					redraw()
+				case charts && e.Key() == tcell.KeyLeft:
+					page--
+					redraw()
 				}
 			}
 		case <-ticker.C:

@@ -42,6 +42,14 @@ The dashboard samples each game process once a second:
 
 The best value in each row is shown in green, the worst in red.
 
+Press **Tab** (or **G**) in the dashboard to switch to **line charts**: one chart per metric, with the three games as three coloured lines over roughly the last minute (one dot column = one second). **←/→** pages through the charts, and Tab goes back to the table. The charts use Braille characters, which give 2×4 dots per terminal cell (see `dashboard/chart.go`).
+
+## Assembly listings
+```powershell
+.\disasm.ps1
+```
+This writes the machine code of each edition as commented x86-64 assembly into `go\asm\`, `rust\asm\` and `csharp\asm\`, each with a README that walks through the same functions. Start with [ASSEMBLY.md](ASSEMBLY.md).
+
 Headless benchmark, with no screen involved, just the game logic and AI:
 ```powershell
 .\bin\blockfall-rs.exe --bench 10000 --seed 42
