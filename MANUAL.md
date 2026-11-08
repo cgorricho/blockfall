@@ -14,21 +14,21 @@ One game, three builds: **Go**, **C#** and **Rust**. They look and play the same
 
 ## 2. Starting the game
 
-Every build is a single `.exe` in `C:\Users\carlos\Documents\blockfall\bin\`.
+Every build is a single `.exe` in `C:\Users\carlos\Documents\Projects\blockfall\bin\`.
 
 ### Go edition
 ```bash
-& 'C:\Users\carlos\Documents\blockfall\bin\blockfall-go.exe'
+& 'C:\Users\carlos\Documents\Projects\blockfall\bin\blockfall-go.exe'
 ```
 
 ### C# edition
 ```bash
-& 'C:\Users\carlos\Documents\blockfall\bin\blockfall-cs.exe'
+& 'C:\Users\carlos\Documents\Projects\blockfall\bin\blockfall-cs.exe'
 ```
 
 ### Rust edition
 ```bash
-& 'C:\Users\carlos\Documents\blockfall\bin\blockfall-rs.exe'
+& 'C:\Users\carlos\Documents\Projects\blockfall\bin\blockfall-rs.exe'
 ```
 
 You can also open the `bin` folder in Explorer and double-click one. Windows opens it in a terminal window, which closes again when you quit.
@@ -62,6 +62,30 @@ The game starts right away. The top line shows which language you're running: `[
 
 The well is **10 columns wide and 20 rows tall**.
 
+### Retro mode (press F)
+
+Press **F** to switch to a plain text look: green characters on a black screen, with every block drawn as `[]`. Press **F** again to go back to colour.
+
+```
+  +--------------------+
+  | . . . . . . . . . .|   NEXT
+  | . . . .[][] . . . .|   [][][][]
+  | . . . .[][] . . . .|
+  | . . . . . . . . . .|
+  |        ...         |
+  | . . . .:::: . . . .|   <- :: = where the piece will land
+  |[][][] . . .[][][][]|
+  +--------------------+
+```
+
+| Symbol | Meaning |
+|--------|---------|
+| `[]` | A block |
+| `::` | Shadow: where the falling piece will land |
+| ` .` | An empty cell |
+
+For example, the long piece is `[][][][]` and the square is two rows of `[][]`. Your score, the board and the current piece all stay the same when you switch, and the game keeps the mode when you restart with **R**.
+
 ---
 
 ## 4. Controls
@@ -76,6 +100,7 @@ The well is **10 columns wide and 20 rows tall**.
 | **Space** | Hard drop: drop to the bottom at once (+2 points per row) |
 | **P** | Pause / resume |
 | **R** | Restart (works at any time) |
+| **F** | Switch between colour mode and retro mode (works at any time) |
 | **Q** or **Esc** | Quit |
 
 **Rotating next to a wall:** if a rotation would push the piece into a wall or another block, the game tries shifting it up to 2 columns left or right so the rotation still works.
@@ -120,13 +145,43 @@ Extra points:
 
 ---
 
-## 8. Troubleshooting
+## 8. Watch the computer play all three
+
+```bash
+& 'C:\Users\carlos\Documents\Projects\blockfall\play-ai.ps1' -Seed 42
+```
+
+Two Windows Terminal windows open:
+
+1. **The games.** All three versions sit side by side, each played by the same computer player. With the same seed they get the same pieces and make the same moves, so the boards stay in step.
+2. **The dashboard.** It shows how hard each game makes your PC work (CPU, RAM, threads, and so on), updated every second. The best value in each row is in green.
+
+In any game window:
+
+| Key | Action |
+|-----|--------|
+| **T** | Switch between watchable speed and turbo (as fast as possible) |
+| **F** | Retro look |
+| **P** | Pause |
+| **Q** | Quit that game |
+
+Turbo is where the language differences really show: watch **Pieces /s** and **Pieces per CPU-second** on the dashboard. Press **T** in all three panes to compare them fairly.
+
+In the dashboard, **R** resets the averages and peaks, and **Q** quits.
+
+Leave out `-Seed 42` to get a random game each time. Add `-Turbo` to start at full speed.
+
+---
+
+## 9. Troubleshooting
 
 | Problem | Fix |
 |---------|-----|
 | The board is cut off or looks scrambled | Make the window bigger (at least 60×28) and restart with **R** |
 | Boxes or `?` where the lines and blocks should be | Run it in Windows Terminal, not the old console window |
 | `blockfall-cs.exe` says .NET is missing | Install the .NET 8 runtime: `winget install Microsoft.DotNet.Runtime.8` |
-| You changed the code and want new builds | Run `& 'C:\Users\carlos\Documents\blockfall\build.ps1'` |
+| You changed the code and want new builds | Run `& 'C:\Users\carlos\Documents\Projects\blockfall\build.ps1'` |
+| The three boards are cut off | Make the game window wider (each pane needs 44 columns) or shrink the font with **Ctrl −** |
+| The dashboard says "not running" | That game isn't open. Start it with `play-ai.ps1`, or wait a second after it starts |
 
 Have fun! 🧱

@@ -25,5 +25,14 @@ cargo build --release
 Copy-Item (Join-Path $root 'rust\target\release\blockfall.exe') (Join-Path $bin 'blockfall-rs.exe') -Force
 Pop-Location
 
+Write-Host '== Dashboard' -ForegroundColor Cyan
+Push-Location (Join-Path $root 'dashboard')
+go mod tidy
+go build -o (Join-Path $bin 'blockfall-dash.exe') .
+Pop-Location
+
+Write-Host '== Same game check (seed 42, 10000 pieces)' -ForegroundColor Cyan
+foreach ($e in 'go', 'cs', 'rs') { & (Join-Path $bin "blockfall-$e.exe") --bench 10000 --seed 42 }
+
 Write-Host "Done. Binaries in $bin" -ForegroundColor Green
 Get-ChildItem $bin | Format-Table Name, Length
