@@ -19,8 +19,8 @@ Research docs stay at the root: [ASSEMBLY.md](ASSEMBLY.md) + `blockfall-2D/{go,r
 
 ## Status
 
-- Branches are stacked: `main` ← `rocker` ← `tower-3d`. All pushed to `origin` (github.com/cgorricho/blockfall); `rocker` and `tower-3d` are not merged into `main` yet.
-- 2026-11-11: the original game moved from the root into `blockfall-2D/` (committed on `tower-3d`).
+- Work on `main`, pushed to `origin` (github.com/cgorricho/blockfall). `rocker` and `tower-3d` were merged into `main` on 2026-11-11 (fast-forward). The two branches still exist locally and on `origin`, with nothing that `main` lacks.
+- 2026-11-11: the original game moved from the root into `blockfall-2D/`.
 - Dashboard charts: tests pass (`cd blockfall-2D\dashboard; go test ./...`), but they were **not yet checked by eye with real games running**.
 
 ## Open threads / ideas
