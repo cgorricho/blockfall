@@ -1,0 +1,10 @@
+[package]
+name = "blockfall-rocker"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+macroquad = { version = "0.4", default-features = false }
+
+[profile.release]
+opt-level = 3

@@ -25,6 +25,12 @@ cargo build --release
 Copy-Item (Join-Path $root 'rust\target\release\blockfall.exe') (Join-Path $bin 'blockfall-rs.exe') -Force
 Pop-Location
 
+Write-Host '== Rocker' -ForegroundColor Cyan
+Push-Location (Join-Path $root 'rocker')
+cargo build --release
+Copy-Item (Join-Path $root 'rocker\target\release\blockfall-rocker.exe') (Join-Path $bin 'blockfall-rocker.exe') -Force
+Pop-Location
+
 Write-Host '== Dashboard' -ForegroundColor Cyan
 Push-Location (Join-Path $root 'dashboard')
 go mod tidy

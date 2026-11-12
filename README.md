@@ -8,8 +8,13 @@ An original falling-block puzzle game for the terminal, built three times with t
 | `csharp/` | C# / .NET 8 | none (System.Console + ANSI) | `bin\blockfall-cs.exe` |
 | `rust/` | Rust | [crossterm](https://github.com/crossterm-rs/crossterm) | `bin\blockfall-rs.exe` |
 | `dashboard/` | Go | tcell + Win32 process APIs | `bin\blockfall-dash.exe` |
+| `rocker/` | Rust | [macroquad](https://macroquad.rs) (GUI window) | `bin\blockfall-rocker.exe` |
+
+**BLOCKFALL ROCKER** is a spin-off. The same pieces are stacked on a rocking base with real rolling physics, and you lose if the stack slides off. See [rocker/README.md](rocker/README.md).
 
 The rules, layout and controls are in [SPEC.md](SPEC.md). All three versions follow it.
+
+Which language came out best, with benchmark numbers: [LANGUAGE-COMPARISON.md](LANGUAGE-COMPARISON.md).
 
 ## Toolchains (installed with winget)
 ```powershell
