@@ -14,11 +14,8 @@ The binary is `bin\blockfall-rocker.exe`. The user plays it themselves and repor
 ## Status
 
 - **Working:** all **33 tests pass** (`cd rocker; cargo test --release`). The release build is copied into `bin\`.
-- **Nothing is committed.** `rocker/` is untracked. Other uncommitted changes in the repo:
-  - `README.md`, `build.ps1`, `.gitignore`: rocker added.
-  - `LANGUAGE-COMPARISON.md`: new.
-  - `csharp/asm/blockfall-cs.asm` and `rust/asm/blockfall-rs.asm`: these were already modified before this work started.
-- **Commit only when the user asks.** The repo is on its default branch, so create a branch first.
+- **Committed** on `main` in `5346a3c` (with `LANGUAGE-COMPARISON.md` and the README/build changes). For the whole repo's state, see [../HANDOFF.md](../HANDOFF.md).
+- **Commit only when the user asks.**
 
 ## Files
 

@@ -12,7 +12,7 @@ blockfall::queue_style::<alloc::io::buffered::bufwriter::BufWriter<std::io::stdi
     140001762  sub    rsp,0x28
     140001766  mov    rdi,rdx
     140001769  mov    rsi,rcx
-; in fn {closure#0}<alloc::io::buffered::bufwriter::BufWriter<std::io::stdio::Stdout>>()
+; in fn and_then<&mut alloc::io::buffered::bufwriter::BufWriter<std::io::stdio::Stdout>, core::io::error::Error, &mut alloc::io::buffered::bufwriter::BufWriter<std::io::stdio::Stdout>, blockfall::queue_style::{closure_env#0}<alloc::io::buffered::bufwriter::BufWriter<std::io::stdio::Stdout>>>()
 ; main.rs:528  queue!(out, SetAttribute(Attribute::Reset))?;
     14000176c  xor    edx,edx
     14000176e  call   140006fd0 <<alloc::io::buffered::bufwriter::BufWriter<std::io::stdio::Stdout> as crossterm::command::QueueableCommand>::queue::<crossterm::style::SetAttribute>>
@@ -3380,7 +3380,7 @@ blockfall::main:    ; at 0x0000000140004120
 ; in fn non_null<alloc::alloc::Global, u8>()
 ; [library] src/raw_vec/mod.rs:611
     140004194  mov    rdx,QWORD PTR [rbx+rcx*8+0x8]
-; in fn deref()
+; in fn as_slice<u8, alloc::alloc::Global>()
 ; [library] src/vec/mod.rs:1865
     140004199  mov    r11,QWORD PTR [rbx+rcx*8+0x10]
 ; in fn next_reject<core::str::pattern::CharSearcher>()
@@ -3839,7 +3839,7 @@ blockfall::main:    ; at 0x0000000140004120
     140004557  je     140004571 <blockfall::main+0x451>
 ; main.rs:686  while i < argv.len() {
     140004559  test   r12,r12
-; in fn drop_in_place<[alloc::string::String]>()
+; in fn drop_glue<[alloc::string::String]>()
 ; [library] src/ptr/mod.rs:847
     14000455c  jne    1400045d1 <blockfall::main+0x4b1>
     14000455e  jmp    140004602 <blockfall::main+0x4e2>
@@ -3863,20 +3863,20 @@ blockfall::main:    ; at 0x0000000140004120
     1400045b7  cmp    BYTE PTR [rsp+0xc8],0x0
     1400045bf  mov    edi,0x1
     1400045c4  cmove  edi,eax
-; in fn drop<alloc::string::String, alloc::alloc::Global>()
+; in fn non_null<alloc::alloc::Global, alloc::string::String>()
 ; [library] src/raw_vec/mod.rs:611
     1400045c7  mov    rbx,QWORD PTR [rsp+0x38]
 ; in fn parse_args()
 ; main.rs:686  while i < argv.len() {
     1400045cc  test   r12,r12
-; in fn drop_in_place<[alloc::string::String]>()
+; in fn drop_glue<[alloc::string::String]>()
 ; [library] src/ptr/mod.rs:847
     1400045cf  je     140004602 <blockfall::main+0x4e2>
 ; in fn current_memory<alloc::alloc::Global>()
 ; [library] src/raw_vec/mod.rs:631
     1400045d1  lea    r15,[rbx+0x8]
     1400045d5  jmp    1400045e9 <blockfall::main+0x4c9>
-; in fn drop_in_place<[alloc::string::String]>()
+; in fn drop_glue<[alloc::string::String]>()
     1400045d7  nop    WORD PTR [rax+rax*1+0x0]
 ; [library] src/ptr/mod.rs:847
     1400045e0  add    r15,0x18
@@ -3887,7 +3887,7 @@ blockfall::main:    ; at 0x0000000140004120
 ; [library] src/raw_vec/mod.rs:631
     1400045ed  test   rdx,rdx
     1400045f0  je     1400045e0 <blockfall::main+0x4c0>
-; in fn drop_in_place<[alloc::string::String]>()
+; in fn drop_glue<[alloc::string::String]>()
 ; [library] src/ptr/mod.rs:847
     1400045f2  mov    rcx,QWORD PTR [r15]
 ; in fn dealloc_nonnull()
@@ -4375,7 +4375,7 @@ blockfall::main:    ; at 0x0000000140004120
 ; in fn non_null<alloc::alloc::Global, u8>()
 ; [library] src/raw_vec/mod.rs:611
     140004b42  mov    rsi,QWORD PTR [rsp+0x108]
-; in fn as_slice<u8, alloc::alloc::Global>()
+; in fn deref()
 ; [library] src/vec/mod.rs:1865
     140004b4a  mov    rdi,QWORD PTR [rsp+0x110]
 ; in fn write_stats()
@@ -5515,7 +5515,7 @@ blockfall::main:    ; at 0x0000000140004120
     1400057da  call   140003d10 <blockfall::kick_rotate>
     1400057df  cmp    BYTE PTR [rsp+0x1e8],0x0
     1400057e7  je     14000581f <<blockfall::Game>::spawn+0x2ff>
-; in fn overflowing_add()
+; in fn checked_add_unsigned()
 ; [library] src/num/int_macros.rs:2553
     1400057e9  inc    ebx
     1400057eb  lea    rax,[rsp+0x1ec]

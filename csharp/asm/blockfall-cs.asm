@@ -196,7 +196,7 @@ G_M000_IG25:                ;; offset=0x0254
        jle      G_M000_IG51
  
 G_M000_IG26:                ;; offset=0x025D
-       mov      rcx, 0x7FF8D784FD98
+       mov      rcx, 0x7FF8E1BDFD98
        call     CORINFO_HELP_NEWSFAST
        mov      r14, rax
        mov      rcx, r14
@@ -204,7 +204,7 @@ G_M000_IG26:                ;; offset=0x025D
        mov      r8d, 1
        call     [Game:.ctor(uint,bool):this]
        mov      gword ptr [rbp-0x128], r14
-       mov      rcx, 0x7FF8D7880540
+       mov      rcx, 0x7FF8E1C10540
        call     CORINFO_HELP_NEWSFAST
        mov      r13, rax
        mov      rcx, r13
@@ -223,7 +223,7 @@ G_M000_IG28:                ;; offset=0x02C1
        mov      r13, gword ptr [rbp-0x138]
        mov      qword ptr [r13+0x10], rcx
        mov      byte  ptr [r13+0x18], 1
-       cmp      dword ptr [(reloc 0x7ff93752917c)], 0
+       cmp      dword ptr [(reloc 0x7ff9418c917c)], 0
        jne      G_M000_IG96
  
 G_M000_IG29:                ;; offset=0x02E7
@@ -249,10 +249,10 @@ G_M000_IG32:                ;; offset=0x030B
 G_M000_IG33:                ;; offset=0x031A
        xor      rcx, rcx
        mov      gword ptr [rbp-0x98], rcx
-       mov      rcx, 0x7FF8D75B5120
+       mov      rcx, 0x7FF8E1945120
        mov      edx, 29
        call     CORINFO_HELP_CLASSINIT_SHARED_DYNAMICCLASS
-       mov      rcx, 0x16B02801EB0
+       mov      rcx, 0x1F370401EB0
        mov      rcx, gword ptr [rcx]
        mov      edx, 256
        cmp      dword ptr [rcx], ecx
@@ -281,7 +281,7 @@ G_M000_IG34:                ;; offset=0x0368
        jb       G_M000_IG50
  
 G_M000_IG35:                ;; offset=0x03A5
-       mov      rcx, 0x1AB971B5F4C
+       mov      rcx, 0x1F300205F4C
        vmovdqu  xmm0, xmmword ptr [rcx]
        vmovdqu  xmm1, xmmword ptr [rcx+0x0A]
        vmovdqu  xmmword ptr [rdx], xmm0
@@ -306,7 +306,7 @@ G_M000_IG36:                ;; offset=0x03D0
        jb       G_M000_IG52
  
 G_M000_IG37:                ;; offset=0x0408
-       mov      rcx, 0x1AB971B5F7C
+       mov      rcx, 0x1F300205F7C
        vmovdqu  xmm0, xmmword ptr [rcx]
        vmovdqu  xmmword ptr [rdx], xmm0
        mov      ecx, dword ptr [rbp-0x88]
@@ -329,7 +329,7 @@ G_M000_IG38:                ;; offset=0x0429
        jb       G_M000_IG53
  
 G_M000_IG39:                ;; offset=0x0461
-       mov      rcx, 0x1AB971B5FA4
+       mov      rcx, 0x1F300205FA4
        mov      rax, qword ptr [rcx]
        mov      r8, qword ptr [rcx+0x06]
        mov      qword ptr [rdx], rax
@@ -354,7 +354,7 @@ G_M000_IG40:                ;; offset=0x0488
        jb       G_M000_IG54
  
 G_M000_IG41:                ;; offset=0x04C0
-       mov      rcx, 0x1AB971B5FCC
+       mov      rcx, 0x1F300205FCC
        mov      rax, qword ptr [rcx]
        mov      r8, qword ptr [rcx+0x06]
        mov      qword ptr [rdx], rax
@@ -379,7 +379,7 @@ G_M000_IG42:                ;; offset=0x04E7
        jb       G_M000_IG55
  
 G_M000_IG43:                ;; offset=0x051F
-       mov      rcx, 0x1AB971B5FF4
+       mov      rcx, 0x1F300205FF4
        mov      rax, qword ptr [rcx]
        mov      r8, qword ptr [rcx+0x06]
        mov      qword ptr [rdx], rax
@@ -404,7 +404,7 @@ G_M000_IG44:                ;; offset=0x0546
        jb       G_M000_IG56
  
 G_M000_IG45:                ;; offset=0x057E
-       mov      rcx, 0x1AB971B601C
+       mov      rcx, 0x1F30020601C
        mov      rax, qword ptr [rcx]
        mov      qword ptr [rdx], rax
        mov      ecx, dword ptr [rbp-0x88]
@@ -416,11 +416,11 @@ G_M000_IG46:                ;; offset=0x059D
        call     [System.Diagnostics.Stopwatch:GetRawElapsedTicks():long:this]
        vxorps   xmm6, xmm6, xmm6
        vcvtsi2sd xmm6, xmm6, rax
-       test     byte  ptr [(reloc 0x7ff8d75b59c2)], 1
+       test     byte  ptr [(reloc 0x7ff8e19459c2)], 1
        je       G_M000_IG99
  
 G_M000_IG47:                ;; offset=0x05BC
-       vmulsd   xmm0, xmm6, qword ptr [(reloc 0x7ff8d75b5d38)]
+       vmulsd   xmm0, xmm6, qword ptr [(reloc 0x7ff8e1945d38)]
        vcvttsd2si  rdx, xmm0
        mov      rcx, 0x346DC5D63886594B
        mov      rax, rcx
@@ -458,12 +458,12 @@ G_M000_IG49:                ;; offset=0x063A
  
 G_M000_IG50:                ;; offset=0x0642
        lea      rcx, [rbp-0x98]
-       mov      rdx, 0x1AB971B5F40
+       mov      rdx, 0x1F300205F40
        call     [System.Runtime.CompilerServices.DefaultInterpolatedStringHandler:GrowThenCopyString(System.String):this]
        jmp      G_M000_IG36
  
 G_M000_IG51:                ;; offset=0x065E
-       mov      rcx, 0x7FF8D784FD98
+       mov      rcx, 0x7FF8E1BDFD98
        call     CORINFO_HELP_NEWSFAST
        mov      r15, rax
        mov      rcx, r15
@@ -473,7 +473,7 @@ G_M000_IG51:                ;; offset=0x065E
        and      esi, edi
        mov      byte  ptr [r15+0x7C], sil
        mov      gword ptr [rbp-0x118], r15
-       mov      rcx, 0x7FF8D78802A0
+       mov      rcx, 0x7FF8E1C102A0
        call     CORINFO_HELP_NEWSFAST
        mov      rbx, rax
        mov      rcx, rbx
@@ -486,31 +486,31 @@ G_M000_IG51:                ;; offset=0x065E
  
 G_M000_IG52:                ;; offset=0x06C3
        lea      rcx, [rbp-0x98]
-       mov      rdx, 0x1AB971B5F70
+       mov      rdx, 0x1F300205F70
        call     [System.Runtime.CompilerServices.DefaultInterpolatedStringHandler:GrowThenCopyString(System.String):this]
        jmp      G_M000_IG38
  
 G_M000_IG53:                ;; offset=0x06DF
        lea      rcx, [rbp-0x98]
-       mov      rdx, 0x1AB971B5F98
+       mov      rdx, 0x1F300205F98
        call     [System.Runtime.CompilerServices.DefaultInterpolatedStringHandler:GrowThenCopyString(System.String):this]
        jmp      G_M000_IG40
  
 G_M000_IG54:                ;; offset=0x06FB
        lea      rcx, [rbp-0x98]
-       mov      rdx, 0x1AB971B5FC0
+       mov      rdx, 0x1F300205FC0
        call     [System.Runtime.CompilerServices.DefaultInterpolatedStringHandler:GrowThenCopyString(System.String):this]
        jmp      G_M000_IG42
  
 G_M000_IG55:                ;; offset=0x0717
        lea      rcx, [rbp-0x98]
-       mov      rdx, 0x1AB971B5FE8
+       mov      rdx, 0x1F300205FE8
        call     [System.Runtime.CompilerServices.DefaultInterpolatedStringHandler:GrowThenCopyString(System.String):this]
        jmp      G_M000_IG44
  
 G_M000_IG56:                ;; offset=0x0733
        lea      rcx, [rbp-0x98]
-       mov      rdx, 0x1AB971B6010
+       mov      rdx, 0x1F300206010
        call     [System.Runtime.CompilerServices.DefaultInterpolatedStringHandler:GrowThenCopyString(System.String):this]
        jmp      G_M000_IG46
  
@@ -520,7 +520,7 @@ G_M000_IG57:                ;; offset=0x074F
        call     [Program:<<Main>$>g__Render|0_0(Game,Screen)]
        mov      rcx, r15
        call     [Game:WriteStats():this]
-       mov      rcx, 0x7FF8D7880540
+       mov      rcx, 0x7FF8E1C10540
        call     CORINFO_HELP_NEWSFAST
        mov      rsi, rax
        mov      rcx, rsi
@@ -539,7 +539,7 @@ G_M000_IG59:                ;; offset=0x07A1
        mov      rsi, gword ptr [rbp-0x140]
        mov      qword ptr [rsi+0x10], rax
        mov      byte  ptr [rsi+0x18], 1
-       cmp      dword ptr [(reloc 0x7ff93752917c)], 0
+       cmp      dword ptr [(reloc 0x7ff9418c917c)], 0
        jne      G_M000_IG83
  
 G_M000_IG60:                ;; offset=0x07C6
@@ -612,7 +612,7 @@ G_M000_IG70:                ;; offset=0x08A2
        mov      rsi, gword ptr [rbp-0x130]
        sub      rax, qword ptr [rsi+0x10]
        add      r13, rax
-       cmp      dword ptr [(reloc 0x7ff93752917c)], 0
+       cmp      dword ptr [(reloc 0x7ff9418c917c)], 0
        mov      rbx, gword ptr [rbp-0x120]
        mov      r15, gword ptr [rbp-0x118]
        jne      G_M000_IG78
@@ -620,11 +620,11 @@ G_M000_IG70:                ;; offset=0x08A2
 G_M000_IG71:                ;; offset=0x08D4
        vxorps   xmm8, xmm8, xmm8
        vcvtsi2sd xmm8, xmm8, r13
-       test     byte  ptr [(reloc 0x7ff8d75b59c2)], 1
+       test     byte  ptr [(reloc 0x7ff8e19459c2)], 1
        je       G_M000_IG81
  
 G_M000_IG72:                ;; offset=0x08EB
-       vmulsd   xmm0, xmm8, qword ptr [(reloc 0x7ff8d75b5d38)]
+       vmulsd   xmm0, xmm8, qword ptr [(reloc 0x7ff8e1945d38)]
        vcvttsd2si  rdx, xmm0
        mov      rcx, 0x346DC5D63886594B
        mov      rax, rcx
@@ -651,7 +651,7 @@ G_M000_IG74:                ;; offset=0x0946
        mov      rsi, gword ptr [rbp-0x130]
        mov      qword ptr [rsi+0x10], rcx
        mov      byte  ptr [rsi+0x18], 1
-       cmp      dword ptr [(reloc 0x7ff93752917c)], 0
+       cmp      dword ptr [(reloc 0x7ff9418c917c)], 0
        mov      rbx, gword ptr [rbp-0x120]
        mov      r15, gword ptr [rbp-0x118]
        jne      SHORT G_M000_IG82
@@ -678,7 +678,7 @@ G_M000_IG78:                ;; offset=0x09AA
        jmp      G_M000_IG71
  
 G_M000_IG79:                ;; offset=0x09B4
-       mov      rcx, 0x7FF8D75B5120
+       mov      rcx, 0x7FF8E1945120
        mov      edx, 0x872
        call     CORINFO_HELP_GETSHARED_NONGCSTATIC_BASE
        jmp      G_M000_IG88
@@ -688,7 +688,7 @@ G_M000_IG80:                ;; offset=0x09CD
        jmp      G_M000_IG87
  
 G_M000_IG81:                ;; offset=0x09D7
-       mov      rcx, 0x7FF8D75B5120
+       mov      rcx, 0x7FF8E1945120
        mov      edx, 0x872
        call     CORINFO_HELP_GETSHARED_NONGCSTATIC_BASE
        jmp      G_M000_IG72
@@ -723,7 +723,7 @@ G_M000_IG86:                ;; offset=0x0A4A
        mov      r12, gword ptr [rbp-0x148]
        sub      rax, qword ptr [r12+0x10]
        add      r14, rax
-       cmp      dword ptr [(reloc 0x7ff93752917c)], 0
+       cmp      dword ptr [(reloc 0x7ff9418c917c)], 0
        mov      rbx, gword ptr [rbp-0x120]
        jne      G_M000_IG80
  
@@ -731,11 +731,11 @@ G_M000_IG87:                ;; offset=0x0A76
        mov      r15, gword ptr [rbp-0x118]
        vxorps   xmm7, xmm7, xmm7
        vcvtsi2sd xmm7, xmm7, r14
-       test     byte  ptr [(reloc 0x7ff8d75b59c2)], 1
+       test     byte  ptr [(reloc 0x7ff8e19459c2)], 1
        je       G_M000_IG79
  
 G_M000_IG88:                ;; offset=0x0A93
-       vmulsd   xmm0, xmm7, qword ptr [(reloc 0x7ff8d75b5d38)]
+       vmulsd   xmm0, xmm7, qword ptr [(reloc 0x7ff8e1945d38)]
        vcvttsd2si  rdx, xmm0
        mov      rcx, 0x346DC5D63886594B
        mov      rax, rcx
@@ -821,7 +821,7 @@ G_M000_IG98:                ;; offset=0x0B9C
        int3     
  
 G_M000_IG99:                ;; offset=0x0BA3
-       mov      rcx, 0x7FF8D75B5120
+       mov      rcx, 0x7FF8E1945120
        mov      edx, 0x872
        call     CORINFO_HELP_GETSHARED_NONGCSTATIC_BASE
        jmp      G_M000_IG47
@@ -901,26 +901,26 @@ G_M000_IG02:                ;; offset=0x001E
        mov      dword ptr [rsp+0x20], 20
        mov      dword ptr [rsp+0x24], 10
        lea      r8, [rsp+0x20]
-       mov      rcx, 0x7FF8D78F97F8
+       mov      rcx, 0x7FF8E1C897F8
        mov      edx, 2
        call     CORINFO_HELP_NEW_MDARR
        mov      rcx, bword ptr [rsp+0x28]
        mov      rdx, rax
        call     CORINFO_HELP_ASSIGN_REF
-       mov      rcx, 0x7FF8D78F9A10
+       mov      rcx, 0x7FF8E1C89A10
        call     CORINFO_HELP_NEWSFAST
        mov      rbp, rax
-       mov      rcx, 0x7FF8D75B5120
+       mov      rcx, 0x7FF8E1945120
        mov      edx, 31
        call     CORINFO_HELP_CLASSINIT_SHARED_DYNAMICCLASS
-       mov      rcx, 0x16B02801EB8
+       mov      rcx, 0x1F370401EB8
        mov      rdx, gword ptr [rcx]
        lea      rcx, bword ptr [rbp+0x08]
        call     CORINFO_HELP_ASSIGN_REF
        lea      rcx, bword ptr [rbx+0x10]
        mov      rdx, rbp
        call     CORINFO_HELP_ASSIGN_REF
-       mov      rbp, 0x7FF8D7880540
+       mov      rbp, 0x7FF8E1C10540
        mov      rcx, rbp
        call     CORINFO_HELP_NEWSFAST
        xor      ecx, ecx
@@ -932,13 +932,13 @@ G_M000_IG03:                ;; offset=0x00C1
        lea      rcx, bword ptr [rbx+0x18]
        mov      rdx, rax
        call     CORINFO_HELP_ASSIGN_REF
-       mov      rcx, 0x7FF8D77E7080
+       mov      rcx, 0x7FF8E1B77080
        call     CORINFO_HELP_NEWSFAST
        mov      r14, rax
-       mov      rcx, 0x7FF8D75B5120
+       mov      rcx, 0x7FF8E1945120
        mov      edx, 12
        call     CORINFO_HELP_CLASSINIT_SHARED_DYNAMICCLASS
-       mov      rcx, 0x16B02801EC0
+       mov      rcx, 0x1F370401EC0
        mov      rdx, gword ptr [rcx]
        lea      rcx, bword ptr [r14+0x08]
        call     CORINFO_HELP_ASSIGN_REF
@@ -1011,7 +1011,7 @@ G_M000_IG02:                ;; offset=0x0014
        mov      dword ptr [rsp+0x20], 20
        mov      dword ptr [rsp+0x24], 10
        lea      r8, [rsp+0x20]
-       mov      rcx, 0x7FF8D78F97F8
+       mov      rcx, 0x7FF8E1C897F8
        mov      edx, 2
        call     CORINFO_HELP_NEW_MDARR
        mov      rcx, bword ptr [rsp+0x28]
@@ -1066,11 +1066,11 @@ G_M000_IG02:                ;; offset=0x000D
        jne      G_M000_IG06
  
 G_M000_IG03:                ;; offset=0x001B
-       mov      rcx, 0x7FF8D7668318
+       mov      rcx, 0x7FF8E19F8318
        mov      edx, 7
        call     CORINFO_HELP_NEWARR_1_VC
        mov      rsi, rax
-       mov      rcx, 0x16B0226BBD8
+       mov      rcx, 0x1F37004BBD8
        vmovdqu  xmm0, xmmword ptr [rcx]
        vmovdqu  xmmword ptr [rsi+0x10], xmm0
        vmovdqu  xmm0, xmmword ptr [rcx+0x0C]
@@ -1196,21 +1196,21 @@ G_M000_IG01:                ;; offset=0x0000
        mov      rbx, rcx
  
 G_M000_IG02:                ;; offset=0x001C
-       test     byte  ptr [(reloc 0x7ff8d770c5c8)], 1
+       test     byte  ptr [(reloc 0x7ff8e1a9c5c8)], 1
        je       G_M000_IG13
  
 G_M000_IG03:                ;; offset=0x0029
-       mov      rcx, 0x16B02801D80
+       mov      rcx, 0x1F370401D80
        mov      rcx, gword ptr [rcx]
        mov      esi, dword ptr [rbx+0x68]
        mov      eax, esi
        cmp      eax, dword ptr [rcx+0x08]
        jae      G_M000_IG17
        mov      rdi, gword ptr [rcx+8*rax+0x10]
-       mov      rcx, 0x7FF8D78F9A10
+       mov      rcx, 0x7FF8E1C89A10
        call     CORINFO_HELP_NEWSFAST
        mov      rbp, rax
-       mov      rcx, 0x1AB971B6130
+       mov      rcx, 0x1F300206130
        mov      gword ptr [rbp+0x08], rcx
        mov      dword ptr [rbp+0x10], esi
        mov      rcx, gword ptr [rdi+0x08]
@@ -1249,7 +1249,7 @@ G_M000_IG04:                ;; offset=0x00DB
        mov      rsi, gword ptr [rsp+0x38]
        mov      qword ptr [rsi+0x10], rdx
        mov      byte  ptr [rsi+0x18], 1
-       cmp      dword ptr [(reloc 0x7ff93752917c)], 0
+       cmp      dword ptr [(reloc 0x7ff9418c917c)], 0
        jne      G_M000_IG14
  
 G_M000_IG05:                ;; offset=0x00FC
@@ -1279,7 +1279,7 @@ G_M000_IG07:                ;; offset=0x0148
        mov      rbx, gword ptr [rsp+0x30]
        mov      qword ptr [rbx+0x10], rdx
        mov      byte  ptr [rbx+0x18], 1
-       cmp      dword ptr [(reloc 0x7ff93752917c)], 0
+       cmp      dword ptr [(reloc 0x7ff9418c917c)], 0
        jne      G_M000_IG15
  
 G_M000_IG08:                ;; offset=0x0169
@@ -1312,7 +1312,7 @@ G_M000_IG11:                ;; offset=0x01A9
        mov      rbx, gword ptr [rsp+0x28]
        mov      qword ptr [rbx+0x10], rcx
        mov      byte  ptr [rbx+0x18], 1
-       cmp      dword ptr [(reloc 0x7ff93752917c)], 0
+       cmp      dword ptr [(reloc 0x7ff9418c917c)], 0
        jne      SHORT G_M000_IG16
  
 G_M000_IG12:                ;; offset=0x01C6
@@ -1324,7 +1324,7 @@ G_M000_IG12:                ;; offset=0x01C6
        ret      
  
 G_M000_IG13:                ;; offset=0x01CF
-       mov      rcx, 0x7FF8D770C590
+       mov      rcx, 0x7FF8E1A9C590
        mov      edx, 8
        call     CORINFO_HELP_GETSHARED_NONGCSTATIC_BASE
        jmp      G_M000_IG03
@@ -1370,24 +1370,24 @@ G_M000_IG01:                ;; offset=0x0000
        jne      SHORT  -5 instr
  
 G_M000_IG02:                ;; offset=0x0046
-       mov      rcx, 0x7FF8D7668318
+       mov      rcx, 0x7FF8E19F8318
        mov      edx, 5
        call     CORINFO_HELP_NEWARR_1_VC
        mov      gword ptr [rbp-0x08], rax
-       mov      rcx, 0x7FF8D78FA130
+       mov      rcx, 0x7FF8E1C8A130
        call     CORINFO_HELP_FIELDDESC_TO_STUBRUNTIMEFIELD
        mov      gword ptr [rbp-0x10], rax
        mov      rcx, gword ptr [rbp-0x08]
        mov      rdx, gword ptr [rbp-0x10]
        call     System.Runtime.CompilerServices.RuntimeHelpers:InitializeArray(System.Array,System.RuntimeFieldHandle)
        mov      rdx, gword ptr [rbp-0x08]
-       mov      rcx, 0x16B02801D78
+       mov      rcx, 0x1F370401D78
        call     CORINFO_HELP_ASSIGN_REF
-       mov      rcx, 0x7FF8D78FABB8
+       mov      rcx, 0x7FF8E1C8ABB8
        mov      edx, 7
        call     CORINFO_HELP_NEWARR_1_OBJ
        mov      gword ptr [rbp-0x18], rax
-       mov      rcx, 0x7FF8D78F9D88
+       mov      rcx, 0x7FF8E1C89D88
        mov      edx, 4
        call     CORINFO_HELP_NEWARR_1_VC
        mov      gword ptr [rbp-0x20], rax
@@ -1449,7 +1449,7 @@ G_M000_IG03:                ;; offset=0x0160
        lea      rcx, bword ptr [rcx+8*rdx+0x10]
        mov      rax, qword ptr [rbp-0x40]
        mov      qword ptr [rcx], rax
-       mov      rcx, 0x7FF8D78FAA88
+       mov      rcx, 0x7FF8E1C8AA88
        call     CORINFO_HELP_NEWSFAST
        mov      gword ptr [rbp-0x48], rax
        mov      rcx, gword ptr [rbp-0x48]
@@ -1461,7 +1461,7 @@ G_M000_IG03:                ;; offset=0x0160
        mov      r8, gword ptr [rbp-0x48]
        xor      edx, edx
        call     CORINFO_HELP_ARRADDR_ST
-       mov      rcx, 0x7FF8D78F9D88
+       mov      rcx, 0x7FF8E1C89D88
        mov      edx, 4
        call     CORINFO_HELP_NEWARR_1_VC
        mov      gword ptr [rbp-0x50], rax
@@ -1523,7 +1523,7 @@ G_M000_IG04:                ;; offset=0x0266
        lea      rcx, bword ptr [rcx+8*rdx+0x10]
        mov      rax, qword ptr [rbp-0x70]
        mov      qword ptr [rcx], rax
-       mov      rcx, 0x7FF8D78FAA88
+       mov      rcx, 0x7FF8E1C8AA88
        call     CORINFO_HELP_NEWSFAST
        mov      gword ptr [rbp-0x78], rax
        mov      rcx, gword ptr [rbp-0x78]
@@ -1535,7 +1535,7 @@ G_M000_IG04:                ;; offset=0x0266
        mov      r8, gword ptr [rbp-0x78]
        mov      edx, 1
        call     CORINFO_HELP_ARRADDR_ST
-       mov      rcx, 0x7FF8D78F9D88
+       mov      rcx, 0x7FF8E1C89D88
        mov      edx, 4
        call     CORINFO_HELP_NEWARR_1_VC
        mov      gword ptr [rbp-0x80], rax
@@ -1597,7 +1597,7 @@ G_M000_IG05:                ;; offset=0x037B
        lea      rcx, bword ptr [rcx+8*rdx+0x10]
        mov      rax, qword ptr [rbp-0xA0]
        mov      qword ptr [rcx], rax
-       mov      rcx, 0x7FF8D78FAA88
+       mov      rcx, 0x7FF8E1C8AA88
        call     CORINFO_HELP_NEWSFAST
        mov      gword ptr [rbp-0xA8], rax
        mov      rcx, gword ptr [rbp-0xA8]
@@ -1609,7 +1609,7 @@ G_M000_IG05:                ;; offset=0x037B
        mov      r8, gword ptr [rbp-0xA8]
        mov      edx, 2
        call     CORINFO_HELP_ARRADDR_ST
-       mov      rcx, 0x7FF8D78F9D88
+       mov      rcx, 0x7FF8E1C89D88
        mov      edx, 4
        call     CORINFO_HELP_NEWARR_1_VC
        mov      gword ptr [rbp-0xB0], rax
@@ -1671,7 +1671,7 @@ G_M000_IG06:                ;; offset=0x04B7
        lea      rcx, bword ptr [rcx+8*rdx+0x10]
        mov      rax, qword ptr [rbp-0xD0]
        mov      qword ptr [rcx], rax
-       mov      rcx, 0x7FF8D78FAA88
+       mov      rcx, 0x7FF8E1C8AA88
        call     CORINFO_HELP_NEWSFAST
        mov      gword ptr [rbp-0xD8], rax
        mov      rcx, gword ptr [rbp-0xD8]
@@ -1685,7 +1685,7 @@ G_M000_IG07:                ;; offset=0x05E7
        mov      r8, gword ptr [rbp-0xD8]
        mov      edx, 3
        call     CORINFO_HELP_ARRADDR_ST
-       mov      rcx, 0x7FF8D78F9D88
+       mov      rcx, 0x7FF8E1C89D88
        mov      edx, 4
        call     CORINFO_HELP_NEWARR_1_VC
        mov      gword ptr [rbp-0xE0], rax
@@ -1747,7 +1747,7 @@ G_M000_IG08:                ;; offset=0x0719
        lea      rcx, bword ptr [rcx+8*rdx+0x10]
        mov      rax, qword ptr [rbp-0x100]
        mov      qword ptr [rcx], rax
-       mov      rcx, 0x7FF8D78FAA88
+       mov      rcx, 0x7FF8E1C8AA88
        call     CORINFO_HELP_NEWSFAST
        mov      gword ptr [rbp-0x108], rax
        mov      rcx, gword ptr [rbp-0x108]
@@ -1759,7 +1759,7 @@ G_M000_IG08:                ;; offset=0x0719
        mov      r8, gword ptr [rbp-0x108]
        mov      edx, 4
        call     CORINFO_HELP_ARRADDR_ST
-       mov      rcx, 0x7FF8D78F9D88
+       mov      rcx, 0x7FF8E1C89D88
        mov      edx, 4
        call     CORINFO_HELP_NEWARR_1_VC
        mov      gword ptr [rbp-0x110], rax
@@ -1821,7 +1821,7 @@ G_M000_IG09:                ;; offset=0x0858
        lea      rcx, bword ptr [rcx+8*rdx+0x10]
        mov      rax, qword ptr [rbp-0x130]
        mov      qword ptr [rcx], rax
-       mov      rcx, 0x7FF8D78FAA88
+       mov      rcx, 0x7FF8E1C8AA88
        call     CORINFO_HELP_NEWSFAST
        mov      gword ptr [rbp-0x138], rax
        mov      rcx, gword ptr [rbp-0x138]
@@ -1833,7 +1833,7 @@ G_M000_IG09:                ;; offset=0x0858
        mov      r8, gword ptr [rbp-0x138]
        mov      edx, 5
        call     CORINFO_HELP_ARRADDR_ST
-       mov      rcx, 0x7FF8D78F9D88
+       mov      rcx, 0x7FF8E1C89D88
        mov      edx, 4
        call     CORINFO_HELP_NEWARR_1_VC
        mov      gword ptr [rbp-0x140], rax
@@ -1895,7 +1895,7 @@ G_M000_IG10:                ;; offset=0x0997
        lea      rcx, bword ptr [rcx+8*rdx+0x10]
        mov      rax, qword ptr [rbp-0x160]
        mov      qword ptr [rcx], rax
-       mov      rcx, 0x7FF8D78FAA88
+       mov      rcx, 0x7FF8E1C8AA88
        call     CORINFO_HELP_NEWSFAST
        mov      gword ptr [rbp-0x168], rax
        mov      rcx, gword ptr [rbp-0x168]
@@ -1908,7 +1908,7 @@ G_M000_IG10:                ;; offset=0x0997
        mov      edx, 6
        call     CORINFO_HELP_ARRADDR_ST
        mov      rdx, gword ptr [rbp-0x18]
-       mov      rcx, 0x16B02801D80
+       mov      rcx, 0x1F370401D80
        call     CORINFO_HELP_ASSIGN_REF
        nop      
  
@@ -2075,7 +2075,7 @@ G_M000_IG02:                ;; offset=0x001B
        mov      dword ptr [rsp+0x50], ebp
        xor      r14d, r14d
        xor      r15d, r15d
-       mov      rcx, 0x16B02801D80
+       mov      rcx, 0x1F370401D80
        mov      rcx, gword ptr [rcx]
        mov      rdx, gword ptr [rbx+0x10]
        mov      edx, dword ptr [rdx+0x10]
@@ -2107,7 +2107,7 @@ G_M000_IG04:                ;; offset=0x0087
        mov      r8d, 1
        call     [Game:Rotate(Pt[],int,bool):Pt[]]
        mov      gword ptr [rsp+0x30], rax
-       mov      r8, 0x16B02801D78
+       mov      r8, 0x1F370401D78
        mov      r10, gword ptr [r8]
        mov      gword ptr [rsp+0x28], r10
        xor      r11d, r11d
@@ -2492,7 +2492,7 @@ G_M000_IG02:                ;; offset=0x0013
        xor      edi, edi
        xor      ebp, ebp
        xor      r14d, r14d
-       mov      rcx, 0x7FF8D78FAE68
+       mov      rcx, 0x7FF8E1C8AE68
        mov      edx, 10
        call     CORINFO_HELP_NEWARR_1_VC
        xor      ecx, ecx
@@ -2639,7 +2639,7 @@ G_M000_IG01:                ;; offset=0x0000
 G_M000_IG02:                ;; offset=0x0010
        mov      ebp, dword ptr [rbx+0x08]
        mov      edx, ebp
-       mov      rcx, 0x7FF8D78F9D88
+       mov      rcx, 0x7FF8E1C89D88
        call     CORINFO_HELP_NEWARR_1_VC
        xor      ecx, ecx
        test     ebp, ebp
@@ -2766,7 +2766,7 @@ G_M000_IG05:                ;; offset=0x0023
        mov      rdx, rsi
        cmp      byte  ptr [rdx], dl
        add      rdx, 8
-       mov      r8, 0x16B02801D80
+       mov      r8, 0x1F370401D80
        mov      r8, gword ptr [r8]
        mov      r9d, dword ptr [rsi+0x10]
        cmp      r9d, 7
@@ -2966,10 +2966,10 @@ G_M000_IG04:                ;; offset=0x0077
        mov      rcx, gword ptr [rbx+0x08]
        call     [Game:ClearLines(int[,]):int]
        mov      esi, eax
-       mov      rcx, 0x7FF8D78FAE68
+       mov      rcx, 0x7FF8E1C8AE68
        mov      edx, 5
        call     CORINFO_HELP_NEWARR_1_VC
-       mov      rdx, 0x16B0226BBB0
+       mov      rdx, 0x1F37004BBB0
        vmovdqu  ymm0, ymmword ptr [rdx]
        vmovdqu  ymmword ptr [rax+0x10], ymm0
        mov      rcx, qword ptr [rdx+0x20]
@@ -3041,7 +3041,7 @@ G_M000_IG02:                ;; offset=0x0023
        movzx    r8, byte  ptr [rsp+0x98]
        call     [Game:Rotate(Pt[],int,bool):Pt[]]
        mov      r14, rax
-       mov      r8, 0x16B02801D78
+       mov      r8, 0x1F370401D78
        mov      r15, gword ptr [r8]
        xor      r13d, r13d
  
