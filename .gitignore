@@ -1,8 +1,9 @@
 # build outputs
 bin/
-blockfall-2D/csharp/bin/
-blockfall-2D/csharp/obj/
-blockfall-2D/csharp/out/
-blockfall-2D/rust/target/
-rocker/target/
-tower-3D/target/
+01_blockfall-2D/csharp/bin/
+01_blockfall-2D/csharp/obj/
+01_blockfall-2D/csharp/out/
+01_blockfall-2D/rust/target/
+02_rocker/target/
+03_tower-3D/target/
+04_rocker-tower/target/

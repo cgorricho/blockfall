@@ -38,7 +38,7 @@ BLOCKFALL was built three times with the same rules ([SPEC.md](SPEC.md)): in Go,
 
 - It was the quickest to write, with the fewest dependencies.
 - Its build is simple.
-- tcell made it the natural choice for the resource dashboard (`blockfall-2D/dashboard/`).
+- tcell made it the natural choice for the resource dashboard (`01_blockfall-2D/dashboard/`).
 - Its runtime adds overhead (stack-growth checks, GC write barriers, bounds checks), but you can't notice it at a playable pace.
 - For a small terminal tool that needs to ship quickly, Go is the practical choice.
 

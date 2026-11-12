@@ -66,7 +66,7 @@ Orthographic camera (no perspective shrink), 30° above horizontal by default, l
 ## Build and run
 
 ```
-cd tower-3D
+cd 03_tower-3D
 cargo test --release
 cargo build --release
 copy target\release\blockfall-tower3d.exe ..\bin\

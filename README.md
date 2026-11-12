@@ -1,12 +1,13 @@
 # BLOCKFALL
 
-An original falling-block puzzle game, built several ways. Each project has its own folder and README:
+An original falling-block puzzle game, built several ways. Each project has its own folder and README. The number prefix gives the order they were built in:
 
 | folder | what | tech | binary |
 |--------|------|------|--------|
-| [blockfall-2D/](blockfall-2D/README.md) | The original terminal game, built three times (Go, C#, Rust) with the same behaviour, plus a live resource dashboard | Go · C# / .NET 8 · Rust (crossterm) · Go (tcell) | `bin\blockfall-{go,cs,rs,dash}.exe` |
-| [rocker/](rocker/README.md) | **BLOCKFALL ROCKER**: the same pieces stacked on a rocking base with real rolling physics; you lose if the stack slides off | Rust + [macroquad](https://macroquad.rs) | `bin\blockfall-rocker.exe` |
-| [tower-3D/](tower-3D/README.md) | **BLOCKFALL TOWER-3D**: the board wrapped around a 3D cylinder | Rust + macroquad | `bin\blockfall-tower3d.exe` |
+| [01_blockfall-2D/](01_blockfall-2D/README.md) | The original terminal game, built three times (Go, C#, Rust) with the same behaviour, plus a live resource dashboard | Go · C# / .NET 8 · Rust (crossterm) · Go (tcell) | `bin\blockfall-{go,cs,rs,dash}.exe` |
+| [02_rocker/](02_rocker/README.md) | **BLOCKFALL ROCKER**: the same pieces stacked on a rocking base with real rolling physics; you lose if the stack slides off | Rust + [macroquad](https://macroquad.rs) | `bin\blockfall-rocker.exe` |
+| [03_tower-3D/](03_tower-3D/README.md) | **BLOCKFALL TOWER-3D**: the board wrapped around a 3D cylinder | Rust + macroquad | `bin\blockfall-tower3d.exe` |
+| [04_rocker-tower/](04_rocker-tower/README.md) | **BLOCKFALL ROCKER-TOWER**: the tower-3D cylinder on a rocking spherical base; Rocker's rolling physics as a full 3D rigid body | Rust + macroquad | `bin\blockfall-rocker-tower.exe` |
 
 ## Docs in this folder
 

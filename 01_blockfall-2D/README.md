@@ -33,9 +33,9 @@ Controls: ←/→ move · ↑/X rotate · Z rotate ccw · ↓ soft drop · Space
 
 ## Computer players + resource dashboard
 ```powershell
-& 'C:\Users\carlos\Documents\Projects\blockfall\blockfall-2D\play-ai.ps1'            # random seed
-& 'C:\Users\carlos\Documents\Projects\blockfall\blockfall-2D\play-ai.ps1' -Seed 42   # repeatable
-& 'C:\Users\carlos\Documents\Projects\blockfall\blockfall-2D\play-ai.ps1' -Turbo     # start flat-out
+& 'C:\Users\carlos\Documents\Projects\blockfall\01_blockfall-2D\play-ai.ps1'            # random seed
+& 'C:\Users\carlos\Documents\Projects\blockfall\01_blockfall-2D\play-ai.ps1' -Seed 42   # repeatable
+& 'C:\Users\carlos\Documents\Projects\blockfall\01_blockfall-2D\play-ai.ps1' -Turbo     # start flat-out
 ```
 This opens one Windows Terminal window with the three games side by side, each played by the same AI with the same seed, so they play the same game. A second window opens the dashboard. Press **T** in a game to switch between watchable and turbo pace.
 
@@ -49,8 +49,8 @@ The best value in each row is shown in green, the worst in red. Press **Tab** (o
 
 To measure CPU and I/O over a fixed window while the games run:
 ```powershell
-& 'C:\Users\carlos\Documents\Projects\blockfall\blockfall-2D\measure.ps1'              # 30 seconds
-& 'C:\Users\carlos\Documents\Projects\blockfall\blockfall-2D\measure.ps1' -Seconds 60
+& 'C:\Users\carlos\Documents\Projects\blockfall\01_blockfall-2D\measure.ps1'              # 30 seconds
+& 'C:\Users\carlos\Documents\Projects\blockfall\01_blockfall-2D\measure.ps1' -Seconds 60
 ```
 
 ## Headless benchmark
@@ -62,7 +62,7 @@ Results and analysis: [LANGUAGE-COMPARISON.md](../LANGUAGE-COMPARISON.md).
 
 ## Assembly listings
 ```powershell
-& 'C:\Users\carlos\Documents\Projects\blockfall\blockfall-2D\disasm.ps1'
+& 'C:\Users\carlos\Documents\Projects\blockfall\01_blockfall-2D\disasm.ps1'
 ```
 This writes the machine code of each edition as commented x86-64 assembly into `go\asm\`, `rust\asm\` and `csharp\asm\`, each with a README that walks through the same functions. It needs GNU `objdump` (WinLibs). Start with [ASSEMBLY.md](../ASSEMBLY.md).
 
@@ -71,6 +71,6 @@ All three games build each frame in memory and write it to the terminal as a sin
 
 ## Tests
 ```powershell
-cd 'C:\Users\carlos\Documents\Projects\blockfall\blockfall-2D\go'; go test ./...
-cd 'C:\Users\carlos\Documents\Projects\blockfall\blockfall-2D\dashboard'; go test ./...
+cd 'C:\Users\carlos\Documents\Projects\blockfall\01_blockfall-2D\go'; go test ./...
+cd 'C:\Users\carlos\Documents\Projects\blockfall\01_blockfall-2D\dashboard'; go test ./...
 ```

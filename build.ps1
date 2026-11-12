@@ -1,8 +1,8 @@
 # Builds every BLOCKFALL project into .\bin:
-#   blockfall-2D (Go, C#, Rust editions + dashboard), rocker, tower-3D
+#   01_blockfall-2D (Go, C#, Rust editions + dashboard), 02_rocker, 03_tower-3D, 04_rocker-tower
 $ErrorActionPreference = 'Stop'
 $root = $PSScriptRoot
-$twoD = Join-Path $root 'blockfall-2D'
+$twoD = Join-Path $root '01_blockfall-2D'
 $bin = Join-Path $root 'bin'
 New-Item -ItemType Directory -Force $bin | Out-Null
 
@@ -28,15 +28,21 @@ Copy-Item (Join-Path $twoD 'rust\target\release\blockfall.exe') (Join-Path $bin 
 Pop-Location
 
 Write-Host '== Rocker' -ForegroundColor Cyan
-Push-Location (Join-Path $root 'rocker')
+Push-Location (Join-Path $root '02_rocker')
 cargo build --release
-Copy-Item (Join-Path $root 'rocker\target\release\blockfall-rocker.exe') (Join-Path $bin 'blockfall-rocker.exe') -Force
+Copy-Item (Join-Path $root '02_rocker\target\release\blockfall-rocker.exe') (Join-Path $bin 'blockfall-rocker.exe') -Force
 Pop-Location
 
 Write-Host '== Tower-3D' -ForegroundColor Cyan
-Push-Location (Join-Path $root 'tower-3D')
+Push-Location (Join-Path $root '03_tower-3D')
 cargo build --release
-Copy-Item (Join-Path $root 'tower-3D\target\release\blockfall-tower3d.exe') (Join-Path $bin 'blockfall-tower3d.exe') -Force
+Copy-Item (Join-Path $root '03_tower-3D\target\release\blockfall-tower3d.exe') (Join-Path $bin 'blockfall-tower3d.exe') -Force
+Pop-Location
+
+Write-Host '== Rocker-Tower' -ForegroundColor Cyan
+Push-Location (Join-Path $root '04_rocker-tower')
+cargo build --release
+Copy-Item (Join-Path $root '04_rocker-tower\target\release\blockfall-rocker-tower.exe') (Join-Path $bin 'blockfall-rocker-tower.exe') -Force
 Pop-Location
 
 Write-Host '== Dashboard' -ForegroundColor Cyan

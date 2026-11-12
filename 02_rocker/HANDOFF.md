@@ -4,7 +4,7 @@ Read this first in a new session, then [README.md](README.md), which has the ful
 
 ## What it is
 
-A spin-off of BLOCKFALL in `rocker/`, written in Rust with macroquad and running as a GUI window.
+A spin-off of BLOCKFALL in `02_rocker/`, written in Rust with macroquad and running as a GUI window.
 - **Pieces:** the same as BLOCKFALL, dealt in the same order (PRNG and 7-bag from `../SPEC.md`).
 - **The base:** they're stacked on a rocking base that rolls on the floor without slipping.
 - **Physics:** a 1-DOF Lagrangian with RK2 at 480 Hz (`src/physics.rs`).
@@ -13,7 +13,7 @@ The binary is `bin\blockfall-rocker.exe`. The user plays it themselves and repor
 
 ## Status
 
-- **Working:** all **33 tests pass** (`cd rocker; cargo test --release`). The release build is copied into `bin\`.
+- **Working:** all **33 tests pass** (`cd 02_rocker; cargo test --release`). The release build is copied into `bin\`.
 - **Committed** on `main` in `5346a3c` (with `LANGUAGE-COMPARISON.md` and the README/build changes). For the whole repo's state, see [../HANDOFF.md](../HANDOFF.md).
 - **Commit only when the user asks.**
 
@@ -59,7 +59,7 @@ The binary is `bin\blockfall-rocker.exe`. The user plays it themselves and repor
 ## Working notes (Windows)
 
 - **cargo** isn't on Git Bash's PATH by default. Use `export PATH="$PATH:$HOME/.cargo/bin"`. In PowerShell, add `$env:USERPROFILE\.cargo\bin`.
-- **Copying into `bin\` fails while the user's game is running** (the exe is locked). Check with `tasklist | grep -i blockfall-rocker`, then copy `rocker\target\release\blockfall-rocker.exe` to `bin\`.
+- **Copying into `bin\` fails while the user's game is running** (the exe is locked). Check with `tasklist | grep -i blockfall-rocker`, then copy `02_rocker\target\release\blockfall-rocker.exe` to `bin\`.
 - **Screenshots of the window:** start the exe with `Start-Process -PassThru`, then `SetForegroundWindow` + `GetWindowRect` + `Graphics.CopyFromScreen` (via `Add-Type`). Save to the scratchpad.
 - **Testing visual scenarios:** a scratch copy of the crate with a `ROCKER_PILE` env var hack in `Game::reset` pre-fills one side. This was never part of the real code.
 - **Edits:** `src/game.rs` is large. Precise Python string replacements (each asserting exactly one match) worked well.

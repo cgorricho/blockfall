@@ -103,7 +103,7 @@ The result line is printed and also written to `%TEMP%\blockfall-rocker-bench.tx
 ## Tests
 
 ```powershell
-cd rocker; cargo test --release
+cd 02_rocker; cargo test --release
 ```
 There are 33 tests.
 - **Physics:**
