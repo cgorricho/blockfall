@@ -31,6 +31,12 @@ cargo build --release
 Copy-Item (Join-Path $root 'rocker\target\release\blockfall-rocker.exe') (Join-Path $bin 'blockfall-rocker.exe') -Force
 Pop-Location
 
+Write-Host '== Tower-3D' -ForegroundColor Cyan
+Push-Location (Join-Path $root 'tower-3D')
+cargo build --release
+Copy-Item (Join-Path $root 'tower-3D\target\release\blockfall-tower3d.exe') (Join-Path $bin 'blockfall-tower3d.exe') -Force
+Pop-Location
+
 Write-Host '== Dashboard' -ForegroundColor Cyan
 Push-Location (Join-Path $root 'dashboard')
 go mod tidy
