@@ -5,7 +5,7 @@
 - `; in fn X()` means the following code belongs to function `X`, which the compiler **inlined** here (copied into the caller instead of calling it).
 - `; [library] …` is code from Rust's standard library that was inlined, such as `Vec::len` or `i64::abs`.
 
-Start with [../../ASSEMBLY.md](../../ASSEMBLY.md) if assembly is new to you.
+Start with [../../../ASSEMBLY.md](../../../ASSEMBLY.md) if assembly is new to you.
 
 How it's made ([disasm.ps1](../../disasm.ps1)): the script builds the same release profile again, adding only line tables (`CARGO_PROFILE_RELEASE_DEBUG=line-tables-only`), then runs GNU `objdump -d -l -C -M intel`. Debug info is designed not to change the generated code. Here the code size differs by 16 bytes out of 1 MB, and the benchmark gives the same result. Addresses below come from one build, and yours will differ.
 

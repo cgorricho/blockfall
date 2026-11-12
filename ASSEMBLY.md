@@ -4,13 +4,13 @@ Each language folder has an `asm/` folder holding the x86-64 machine code of tha
 
 | file | where the code comes from | walkthrough |
 |------|---------------------------|-------------|
-| [go/asm/blockfall-go.asm](go/asm/blockfall-go.asm) | disassembled from `blockfall-go.exe` | [go/asm/README.md](go/asm/README.md) |
-| [rust/asm/blockfall-rs.asm](rust/asm/blockfall-rs.asm) | disassembled from `blockfall-rs.exe` | [rust/asm/README.md](rust/asm/README.md) |
-| [csharp/asm/blockfall-cs.asm](csharp/asm/blockfall-cs.asm) | printed by the .NET JIT at run time | [csharp/asm/README.md](csharp/asm/README.md) |
+| [go/asm/blockfall-go.asm](blockfall-2D/go/asm/blockfall-go.asm) | disassembled from `blockfall-go.exe` | [go/asm/README.md](blockfall-2D/go/asm/README.md) |
+| [rust/asm/blockfall-rs.asm](blockfall-2D/rust/asm/blockfall-rs.asm) | disassembled from `blockfall-rs.exe` | [rust/asm/README.md](blockfall-2D/rust/asm/README.md) |
+| [csharp/asm/blockfall-cs.asm](blockfall-2D/csharp/asm/blockfall-cs.asm) | printed by the .NET JIT at run time | [csharp/asm/README.md](blockfall-2D/csharp/asm/README.md) |
 
 Regenerate all three after changing the code:
 ```powershell
-.\disasm.ps1
+.\blockfall-2D\disasm.ps1
 ```
 Addresses (such as `140140180`) change with every build. The instructions only change when the code or the compiler changes.
 

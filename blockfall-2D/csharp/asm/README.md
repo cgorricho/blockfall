@@ -1,6 +1,6 @@
 # C# edition: the assembly, explained
 
-[blockfall-cs.asm](blockfall-cs.asm) is x86-64 code that the **.NET JIT** (RyuJIT) produced for the game's methods while running `--bench 10000 --seed 42`. Start with [../../ASSEMBLY.md](../../ASSEMBLY.md) if assembly is new to you.
+[blockfall-cs.asm](blockfall-cs.asm) is x86-64 code that the **.NET JIT** (RyuJIT) produced for the game's methods while running `--bench 10000 --seed 42`. Start with [../../../ASSEMBLY.md](../../../ASSEMBLY.md) if assembly is new to you.
 
 ## Why this listing doesn't come from the `.exe`
 

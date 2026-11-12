@@ -1,4 +1,4 @@
-// BLOCKFALL — Go edition (raw console + ANSI, like the C# and Rust editions). See ../SPEC.md.
+// BLOCKFALL — Go edition (raw console + ANSI, like the C# and Rust editions). See ../../SPEC.md.
 package main
 
 import (

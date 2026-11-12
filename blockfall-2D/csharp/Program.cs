@@ -1,4 +1,4 @@
-// BLOCKFALL — C# edition (System.Console + ANSI). See ../SPEC.md.
+// BLOCKFALL — C# edition (System.Console + ANSI). See ../../SPEC.md.
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;

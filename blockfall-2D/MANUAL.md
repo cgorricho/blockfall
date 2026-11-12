@@ -148,7 +148,7 @@ Extra points:
 ## 8. Watch the computer play all three
 
 ```bash
-& 'C:\Users\carlos\Documents\Projects\blockfall\play-ai.ps1' -Seed 42
+& 'C:\Users\carlos\Documents\Projects\blockfall\blockfall-2D\play-ai.ps1' -Seed 42
 ```
 
 Two Windows Terminal windows open:

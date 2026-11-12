@@ -9,9 +9,10 @@ param(
     [switch]$Turbo
 )
 $ErrorActionPreference = 'Stop'
-$bin = Join-Path $PSScriptRoot 'bin'
+# The binaries live in the repo-wide bin\ folder, one level up.
+$bin = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\bin'))
 foreach ($exe in 'blockfall-go.exe', 'blockfall-cs.exe', 'blockfall-rs.exe', 'blockfall-dash.exe') {
-    if (-not (Test-Path (Join-Path $bin $exe))) { throw "Missing bin\$exe - run .\build.ps1 first" }
+    if (-not (Test-Path (Join-Path $bin $exe))) { throw "Missing bin\$exe - run ..\build.ps1 first" }
 }
 if (-not (Get-Command wt -ErrorAction SilentlyContinue)) { throw 'Windows Terminal (wt.exe) is required' }
 

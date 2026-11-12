@@ -1,6 +1,8 @@
-# Builds all three BLOCKFALL editions into .\bin
+# Builds every BLOCKFALL project into .\bin:
+#   blockfall-2D (Go, C#, Rust editions + dashboard), rocker, tower-3D
 $ErrorActionPreference = 'Stop'
 $root = $PSScriptRoot
+$twoD = Join-Path $root 'blockfall-2D'
 $bin = Join-Path $root 'bin'
 New-Item -ItemType Directory -Force $bin | Out-Null
 
@@ -8,21 +10,21 @@ New-Item -ItemType Directory -Force $bin | Out-Null
 $env:Path = [Environment]::GetEnvironmentVariable('Path', 'Machine') + ';' + [Environment]::GetEnvironmentVariable('Path', 'User')
 
 Write-Host '== Go' -ForegroundColor Cyan
-Push-Location (Join-Path $root 'go')
+Push-Location (Join-Path $twoD 'go')
 go mod tidy
 go build -o (Join-Path $bin 'blockfall-go.exe') .
 Pop-Location
 
 Write-Host '== C#' -ForegroundColor Cyan
-Push-Location (Join-Path $root 'csharp')
-dotnet publish -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true -o (Join-Path $root 'csharp\out') --nologo -v q
-Copy-Item (Join-Path $root 'csharp\out\blockfall.exe') (Join-Path $bin 'blockfall-cs.exe') -Force
+Push-Location (Join-Path $twoD 'csharp')
+dotnet publish -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true -o (Join-Path $twoD 'csharp\out') --nologo -v q
+Copy-Item (Join-Path $twoD 'csharp\out\blockfall.exe') (Join-Path $bin 'blockfall-cs.exe') -Force
 Pop-Location
 
 Write-Host '== Rust' -ForegroundColor Cyan
-Push-Location (Join-Path $root 'rust')
+Push-Location (Join-Path $twoD 'rust')
 cargo build --release
-Copy-Item (Join-Path $root 'rust\target\release\blockfall.exe') (Join-Path $bin 'blockfall-rs.exe') -Force
+Copy-Item (Join-Path $twoD 'rust\target\release\blockfall.exe') (Join-Path $bin 'blockfall-rs.exe') -Force
 Pop-Location
 
 Write-Host '== Rocker' -ForegroundColor Cyan
@@ -38,7 +40,7 @@ Copy-Item (Join-Path $root 'tower-3D\target\release\blockfall-tower3d.exe') (Joi
 Pop-Location
 
 Write-Host '== Dashboard' -ForegroundColor Cyan
-Push-Location (Join-Path $root 'dashboard')
+Push-Location (Join-Path $twoD 'dashboard')
 go mod tidy
 go build -o (Join-Path $bin 'blockfall-dash.exe') .
 Pop-Location

@@ -1,4 +1,4 @@
-// BLOCKFALL — Rust edition (crossterm). See ../SPEC.md.
+// BLOCKFALL — Rust edition (crossterm). See ../../../SPEC.md.
 use std::io::{self, Write};
 use std::path::PathBuf;
 use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};

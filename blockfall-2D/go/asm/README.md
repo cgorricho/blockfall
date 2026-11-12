@@ -1,6 +1,6 @@
 # Go edition: the assembly, explained
 
-[blockfall-go.asm](blockfall-go.asm) is every function of package `main` (the game's own code) as it sits in `blockfall-go.exe`, in Intel syntax. Each group of instructions has a `; main.go:NNN` comment above it, with the Go line it came from. Start with [../../ASSEMBLY.md](../../ASSEMBLY.md) if assembly is new to you.
+[blockfall-go.asm](blockfall-go.asm) is every function of package `main` (the game's own code) as it sits in `blockfall-go.exe`, in Intel syntax. Each group of instructions has a `; main.go:NNN` comment above it, with the Go line it came from. Start with [../../../ASSEMBLY.md](../../../ASSEMBLY.md) if assembly is new to you.
 
 How it's made ([disasm.ps1](../../disasm.ps1)): GNU `objdump -d -M intel` gives Intel syntax, and `go tool objdump` gives the source line of each address. The script merges the two by address. Addresses below come from one build, and yours will differ.
 
