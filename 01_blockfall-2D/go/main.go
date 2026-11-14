@@ -11,11 +11,11 @@ import (
 )
 
 const (
-	W           = 10
-	H           = 20
+	W           = 12
+	H           = 22
 	boardX      = 2
 	boardY      = 2
-	panelX      = 27
+	panelX      = 30
 	langName    = "[Go]"
 	langLabel   = "Go"
 	langKey     = "go"
@@ -33,13 +33,13 @@ type pieceDef struct {
 }
 
 var pieces = []pieceDef{
-	{4, []pt{{0, 1}, {1, 1}, {2, 1}, {3, 1}}, 14}, // I
-	{2, []pt{{0, 0}, {1, 0}, {0, 1}, {1, 1}}, 11}, // O
-	{3, []pt{{1, 0}, {0, 1}, {1, 1}, {2, 1}}, 13}, // T
-	{3, []pt{{1, 0}, {2, 0}, {0, 1}, {1, 1}}, 10}, // S
-	{3, []pt{{0, 0}, {1, 0}, {1, 1}, {2, 1}}, 9},  // Z
-	{3, []pt{{0, 0}, {0, 1}, {1, 1}, {2, 1}}, 12}, // J
-	{3, []pt{{2, 0}, {0, 1}, {1, 1}, {2, 1}}, 3},  // L
+	{4, []pt{{0, 1}, {1, 1}, {2, 1}, {3, 1}}, 175}, // I
+	{2, []pt{{0, 0}, {1, 0}, {0, 1}, {1, 1}}, 75}, // O
+	{3, []pt{{1, 0}, {0, 1}, {1, 1}, {2, 1}}, 179}, // T
+	{3, []pt{{1, 0}, {2, 0}, {0, 1}, {1, 1}}, 141}, // S
+	{3, []pt{{0, 0}, {1, 0}, {1, 1}, {2, 1}}, 73},  // Z
+	{3, []pt{{0, 0}, {0, 1}, {1, 1}, {2, 1}}, 107}, // J
+	{3, []pt{{2, 0}, {0, 1}, {1, 1}, {2, 1}}, 167}, // L
 }
 
 var helpLines = []string{"←→  move", "↑ X rotate", "Z   rotate ccw", "↓   soft drop", "SPC hard drop", "P   pause", "R   restart", "F   retro mode", "Q   quit"}
@@ -426,7 +426,7 @@ type theme struct {
 	blockMono, ghostMono        int
 }
 
-var colourTheme = theme{"██", "░░", " ·", "┌", "┐", "└", "┘", "─", "│", 245, 15, 240, false, 0, 0}
+var colourTheme = theme{"██", "::", " ·", "┌", "┐", "└", "┘", "─", "│", 245, 15, 240, false, 0, 245}
 var retroTheme = theme{"[]", "::", " .", "+", "+", "+", "+", "-", "|", 28, 10, 28, true, 10, 28}
 
 // render draws the game into the screen buffer (the caller flushes it).
@@ -491,10 +491,7 @@ func (g *game) render(s *screen) {
 	}
 	if !g.over {
 		col := blockCol(g.cur.kind)
-		ghostCol := col
-		if th.mono {
-			ghostCol = th.ghostMono
-		}
+		ghostCol := th.ghostMono // the ghost is neutral, never the piece colour
 		gy := g.ghostY()
 		for _, c := range g.cur.cells {
 			cell(g.cur.x+c.x, gy+c.y, th.ghost, ghostCol)
@@ -505,16 +502,28 @@ func (g *game) render(s *screen) {
 	}
 
 	// side panel
-	s.put(panelX, 3, "NEXT", white)
-	for _, c := range pieces[g.next].cells {
-		s.put(panelX+c.x*2, 4+c.y, th.block, fg(blockCol(g.next)))
+	// the next piece sits in a framed box, its label in the top edge
+	s.put(panelX, 3, th.tl, gray)
+	s.put(panelX+1, 3, " ON DECK", white)
+	s.put(panelX+9, 3, th.tr, gray)
+	for y := 4; y <= 7; y++ {
+		s.put(panelX, y, th.vert, gray)
+		s.put(panelX+9, y, th.vert, gray)
 	}
-	s.put(panelX, 9, "SCORE", white)
-	s.put(panelX, 10, fmt.Sprint(g.score), plain)
+	s.put(panelX, 8, th.bl, gray)
+	for i := 1; i <= 8; i++ {
+		s.put(panelX+i, 8, th.horiz, gray)
+	}
+	s.put(panelX+9, 8, th.br, gray)
+	for _, c := range pieces[g.next].cells {
+		s.put(panelX+1+c.x*2, 4+c.y, th.block, fg(blockCol(g.next)))
+	}
+	s.put(panelX, 10, "SCORE", white)
+	s.put(panelX, 11, fmt.Sprint(g.score), plain)
 	s.put(panelX, 12, "LINES", white)
 	s.put(panelX, 13, fmt.Sprint(g.lines), plain)
-	s.put(panelX, 15, "LEVEL", white)
-	s.put(panelX, 16, fmt.Sprint(g.level()), plain)
+	s.put(panelX, 14, "LEVEL", white)
+	s.put(panelX, 15, fmt.Sprint(g.level()), plain)
 	for i, h := range helpLines {
 		s.put(panelX, 18+i, h, gray)
 	}
@@ -528,10 +537,10 @@ func (g *game) render(s *screen) {
 		s.put(boardX+1+(W*2-len([]rune(txt)))/2, row, txt, inv)
 	}
 	if g.over {
-		center(12, " GAME OVER ")
-		center(13, " R = restart ")
+		center(13, " GAME OVER ")
+		center(14, " R = restart ")
 	} else if g.paused {
-		center(12, " PAUSED ")
+		center(13, " PAUSED ")
 	}
 }
 
@@ -595,7 +604,7 @@ func main() {
 	}()
 
 	// ai must be set before the first spawn so it gets a plan
-	g := &game{ai: *aiFlag, turbo: *aiFlag && *turboFlag, rng: seed, seed: seed}
+	g := &game{ai: *aiFlag, turbo: *aiFlag && *turboFlag, rng: seed, seed: seed, retro: true}
 	g.reset()
 	s := newScreen(44, 28)
 	g.render(s)

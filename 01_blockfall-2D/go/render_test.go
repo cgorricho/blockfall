@@ -98,8 +98,8 @@ func TestAIPlaysWell(t *testing.T) {
 		g.aiPlaceNow()
 	}
 	t.Logf("2000 pieces: totalLines=%d games=%d", g.totalLines, g.games)
-	// 2000 pieces = 8000 cells = 800 full rows if nothing were left over
-	if g.totalLines < 700 {
+	// 2000 pieces = 8000 cells = 8000/W full rows if nothing were left over
+	if g.totalLines < 8000/W*7/8 {
 		t.Fatalf("AI cleared only %d lines in 2000 pieces", g.totalLines)
 	}
 }

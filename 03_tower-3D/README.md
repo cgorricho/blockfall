@@ -33,7 +33,7 @@ Same as [../SPEC.md](../SPEC.md) unless stated:
 - **Lock delay (as in Rocker):** a piece that can't fall waits 0.5 s before it locks. A move or rotation restarts the wait, up to 15 times per piece. A piece moved off a ledge falls again. ↓ on a resting piece locks it at once; hard drop locks at once.
 - **A full ring (16, 24 or 32 cells) clears**, and the rows above drop down. Scoring is 100/300/500/800 × level; soft drop +1 per row, hard drop +2.
 - **No walls:** only the floor and other blocks stop a piece.
-- **Ghost:** a see-through copy of the piece shows where it will land.
+- **Ghost:** a neutral gray wire outline (never the piece colour) shows where the piece will land.
 - The falling piece always stays in front of the camera. Each press moves the piece one column on the wall at once. The drawing of the tower **turns smoothly** to catch up, easing in with a time constant of about 45 ms and always taking the short way round.
 - A new piece spawns in the column that's currently in front.
 

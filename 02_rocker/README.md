@@ -10,7 +10,7 @@ The BLOCKFALL pieces, dealt in the same order, stacked on a **rocking base**. It
 
 ## How it plays
 
-- The 10×20 well sits on a wooden rocker. The well's floor is the rocker's flat top. The underside is a circular arc: the lower half of the bottom half of a circle, ±45° from the bottom.
+- The 12×22 well sits on a wooden rocker. The well's floor is the rocker's flat top. The underside is a circular arc: the lower half of the bottom half of a circle, ±45° from the bottom.
 - The pieces, rotation, wall kicks, PRNG, 7-bag, scoring and levels are the same as in [../SPEC.md](../SPEC.md). Seed 42 deals the same pieces as the other editions.
 - Pieces fall and lock **in the well's own grid**, like in BLOCKFALL. Once locked, they're glued to the base, and the whole thing rocks as one rigid body.
 - After each piece the base rocks and settles at a new angle. Pile weight on one side and it leans that way.
@@ -23,7 +23,7 @@ The BLOCKFALL pieces, dealt in the same order, stacked on a **rocking base**. It
 - **Lock delay:** a piece that comes to rest locks after 0.5 s. A successful move or rotation restarts that wait, up to 15 times per piece. A hard drop locks at once.
 - Full rows clear as usual. That's also how you take weight off.
 - **When the stack slides off,** the blocks break apart. They tumble, hit each other, the base and the floor, and end up in a heap. The heap stays inside the play area, on either side.
-- **Easy mode:** the top of the base is flat and the blocks are squares, on a 10×20 grid.
+- **Easy mode:** the top of the base is flat and the blocks are squares, on a 12×22 grid.
 - **Hard mode** (`--hard`, or M in the game): the top of the base is a 45° hacksaw.
   - **The teeth:** 4 teeth with 45° flanks on both sides, each flank two block-edges long. The top is 8√2 ≈ 11.3 wide and ends on a peak at each side. The arc radius is 8.
   - **Diamond blocks:** because the notches are 90° V's, the blocks are diamonds, unit squares turned 45°. A piece spawns already turned and falls straight down. One left/right step moves it one diamond width (√2).
@@ -33,7 +33,7 @@ The BLOCKFALL pieces, dealt in the same order, stacked on a **rocking base**. It
     - **End peaks:** each end peak is only half a tooth. A piece balanced on one can tip outward and fall off, or inward onto the flank.
     - **Sideways moves** are blocked by any block touching the moving piece's faces on that side. A diamond can't squeeze between two corners.
     - **Pushing down a slope:** when a piece is resting, ← or → first tries to slide it one step diagonally down the slope that way, and only then a plain sideways step. That's how you get a piece into a slot it can't fall into straight.
-  - **No walls:** pieces can move past the edge of the base. A piece can come to rest hanging over the edge, which adds torque. A piece that drops past the edge, or slides off the outer slope, tumbles to the floor and is **lost**. The panel counts lost pieces. The **third lost piece ends the game**. The ghost turns into a red outline when the piece would fall off.
+  - **No walls:** pieces can move past the edge of the base. A piece can come to rest hanging over the edge, which adds torque. A piece that drops past the edge, or slides off the outer slope, tumbles to the floor and is **lost**. The panel counts lost pieces. The **third lost piece ends the game**. The ghost (a neutral gray outline) turns into a red outline when the piece would fall off.
   - **Rows:** the diamonds over the base stack in half-rows that alternate 8 and 7 diamonds (the bottom 8 lie on the outer flanks).
   - **Line clears:** a **band**, two neighbouring half-rows, clears when both are full across the width of the base. Any overhang in those rows goes with it. It counts as one line. The bottom half-row holds the tooth tips and never clears.
   - **Sealed cells:** a block falling into an empty cell passes both cells diagonally above it, and sticks to the first face it touches. So once **either** of those two cells is filled, the empty cell can never be filled.
@@ -97,7 +97,7 @@ Headless benchmark, with no window. The base settles for 1 s after each piece:
 .\bin\blockfall-rocker.exe --bench 3000 --seed 42 [--hard]
 ```
 The result line is printed and also written to `%TEMP%\blockfall-rocker-bench.txt`. Typical results:
-- **Easy mode:** about one lost game per 500 pieces.
+- **Easy mode:** no lost games in 1,500 pieces (seed 42) on the 12×22 well; the wider base is steadier than the old 10×20 one, which lost about one game per 500 pieces.
 - **Hard mode:** about one lost game per 75 pieces, with around 50 bands per 1,500 pieces. Because faces hold, cells get sealed easily, and the AI builds wide overhanging stacks. The planner counts holes using the diamond rule (sealed cells), but it still stacks poorly on the diamond grid. Treat it as a demo there, not a strong player.
 
 ## Tests

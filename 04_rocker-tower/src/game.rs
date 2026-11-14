@@ -91,13 +91,13 @@ pub struct PieceDef {
 }
 
 pub const PIECES: [PieceDef; 7] = [
-    PieceDef { n: 4, cells: [(0, 1), (1, 1), (2, 1), (3, 1)], color: 14 }, // I
-    PieceDef { n: 2, cells: [(0, 0), (1, 0), (0, 1), (1, 1)], color: 11 }, // O
-    PieceDef { n: 3, cells: [(1, 0), (0, 1), (1, 1), (2, 1)], color: 13 }, // T
-    PieceDef { n: 3, cells: [(1, 0), (2, 0), (0, 1), (1, 1)], color: 10 }, // S
-    PieceDef { n: 3, cells: [(0, 0), (1, 0), (1, 1), (2, 1)], color: 9 },  // Z
-    PieceDef { n: 3, cells: [(0, 0), (0, 1), (1, 1), (2, 1)], color: 12 }, // J
-    PieceDef { n: 3, cells: [(2, 0), (0, 1), (1, 1), (2, 1)], color: 3 },  // L
+    PieceDef { n: 4, cells: [(0, 1), (1, 1), (2, 1), (3, 1)], color: 175 }, // I
+    PieceDef { n: 2, cells: [(0, 0), (1, 0), (0, 1), (1, 1)], color: 75 }, // O
+    PieceDef { n: 3, cells: [(1, 0), (0, 1), (1, 1), (2, 1)], color: 179 }, // T
+    PieceDef { n: 3, cells: [(1, 0), (2, 0), (0, 1), (1, 1)], color: 141 }, // S
+    PieceDef { n: 3, cells: [(0, 0), (1, 0), (1, 1), (2, 1)], color: 73 },  // Z
+    PieceDef { n: 3, cells: [(0, 0), (0, 1), (1, 1), (2, 1)], color: 107 }, // J
+    PieceDef { n: 3, cells: [(2, 0), (0, 1), (1, 1), (2, 1)], color: 167 }, // L
 ];
 
 #[derive(Clone, Copy, PartialEq, Debug)]

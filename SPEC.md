@@ -3,31 +3,33 @@
 All three implementations (Go, C#, Rust) follow this spec exactly so they look and play the same.
 
 ## Board
-- 10 columns x 20 rows. Each cell is drawn as 2 characters.
-- Empty cell: ` ·` (dim gray, 256-color 240). Locked/active block: `██` in the piece colour. Ghost: `░░` in the piece colour.
+- 12 columns x 22 rows. Each cell is drawn as 2 characters.
+- Empty cell: ` ·` (dim gray, 256-color 240). Locked/active block: `██` in the piece colour. Ghost: `::` in neutral gray (245), never the piece colour.
 - Border: box-drawing `┌ ─ ┐ │ └ ┘`, gray (245).
 
-### Retro mode (toggle with F)
+### Retro mode (toggle with F; the default)
 A monochrome, ASCII-only look on a black background (256-color 0 everywhere, including the rest of the terminal):
-- Block: `[]` bright green (10) for every piece, including the NEXT preview. Ghost: `::` dark green (28). Empty: ` .` dark green (28).
+- Block: `[]` bright green (10) for every piece, including the ON DECK preview. Ghost: `::` dark green (28). Empty: ` .` dark green (28).
 - Border: `+ - |` dark green (28). Title, labels and values: bright green (10). Language tag and key help: dark green (28).
 - Overlays: same text, reversed (black on green).
-- The mode survives restarts (R); it starts in colour mode.
+- The mode survives restarts (R); the game starts in retro mode.
 
 ## Pieces (n = box size; cells as (x,y) in spawn orientation)
 | id | n | cells | colour (256-palette) |
 |----|---|-------|----------------------|
-| I | 4 | (0,1)(1,1)(2,1)(3,1) | 14 |
-| O | 2 | (0,0)(1,0)(0,1)(1,1) | 11 |
-| T | 3 | (1,0)(0,1)(1,1)(2,1) | 13 |
-| S | 3 | (1,0)(2,0)(0,1)(1,1) | 10 |
-| Z | 3 | (0,0)(1,0)(1,1)(2,1) | 9 |
-| J | 3 | (0,0)(0,1)(1,1)(2,1) | 12 |
-| L | 3 | (2,0)(0,1)(1,1)(2,1) | 3 |
+| I | 4 | (0,1)(1,1)(2,1)(3,1) | 175 pink |
+| O | 2 | (0,0)(1,0)(0,1)(1,1) | 75 sky |
+| T | 3 | (1,0)(0,1)(1,1)(2,1) | 179 sand |
+| S | 3 | (1,0)(2,0)(0,1)(1,1) | 141 lavender |
+| Z | 3 | (0,0)(1,0)(1,1)(2,1) | 73 teal |
+| J | 3 | (0,0)(0,1)(1,1)(2,1) | 107 olive |
+| L | 3 | (2,0)(0,1)(1,1)(2,1) | 167 brick |
+
+The palette is BLOCKFALL's own, a set of muted tones. The GUI editions use the same indices (RGB from the xterm-256 cube). Keep it that way: no piece should get the cyan/yellow/purple/green/red/blue/orange colouring other falling-block games use.
 
 - Rotate clockwise: (x,y) -> (n-1-y, x). Counter-clockwise: (x,y) -> (y, n-1-x).
 - Wall kicks: try x offsets 0, -1, +1, -2, +2 (first that fits wins).
-- Spawn: x = (10 - n) / 2, y = 0. If spawn collides -> game over.
+- Spawn: x = (12 - n) / 2, y = 0. If spawn collides -> game over.
 - Randomiser: 7-bag (shuffle all 7, deal, repeat), using the shared PRNG below so every language deals the same pieces for the same seed.
 
 ## Shared PRNG (identical in every language)
@@ -92,14 +94,15 @@ Every 500 ms each game writes `%TEMP%\blockfall\<go|cs|rs>.json` (write to `.tmp
 
 ## Screen layout (0-based terminal cells)
 - Row 0: title ` B L O C K F A L L ` starting at col 2, bold white, followed by the language tag in gray (e.g. `[Go]`).
-- Board border top-left at (col 2, row 2); interior starts at (col 3, row 3); board is 20 chars wide.
+- Board border top-left at (col 2, row 2); interior starts at (col 3, row 3); board is 24 chars wide.
 - The whole layout fits in 44 columns x 28 rows (so three games fit side by side).
-- Side panel at col 27:
-  - row 3  `NEXT`, rows 4–7 next-piece preview (4x4 box, 2 chars per cell)
-  - row 9  `SCORE`, row 10 value
+- Board border from col 2 to col 27, rows 2 to 25.
+- Side panel at col 30:
+  - rows 3–8 the ON DECK box: a 10-wide frame in the border characters, ` ON DECK` set into its top edge (bright), the next piece inside on rows 4–7 from col 31 (2 chars per cell)
+  - row 10 `SCORE`, row 11 value
   - row 12 `LINES`, row 13 value
-  - row 15 `LEVEL`, row 16 value
+  - row 14 `LEVEL`, row 15 value
   - rows 18–26 key help (9 lines, gray):
     `←→  move`, `↑ X rotate`, `Z   rotate ccw`, `↓   soft drop`, `SPC hard drop`, `P   pause`, `R   restart`, `F   retro mode`, `Q   quit`
-- Centered overlay inside the board on row 12: ` PAUSED ` or ` GAME OVER ` (inverse), row 13 ` R = restart ` for game over.
+- Centered overlay inside the board on row 13: ` PAUSED ` or ` GAME OVER ` (inverse), row 14 ` R = restart ` for game over.
 - Input is polled every ~16 ms; see "Frame loop".

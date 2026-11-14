@@ -2,7 +2,7 @@
 //! played in a well glued on top of the rocker.
 //!
 //! Two lattices share one rule set:
-//! - Easy: the usual square grid, 10×20, on a flat top.
+//! - Easy: a square grid, EASY_W×EASY_H (12×22), on a flat top.
 //! - Advanced: a 45° diamond grid on a hacksaw top. Every block is a unit
 //!   square turned 45°. The top has 4 teeth whose flanks are 45° and two block
 //!   edges long, so one block (or an O piece) nests exactly in a V-notch.
@@ -64,13 +64,13 @@ pub struct PieceDef {
 }
 
 pub const PIECES: [PieceDef; 7] = [
-    PieceDef { n: 4, cells: [p(0, 1), p(1, 1), p(2, 1), p(3, 1)], color: 14 }, // I
-    PieceDef { n: 2, cells: [p(0, 0), p(1, 0), p(0, 1), p(1, 1)], color: 11 }, // O
-    PieceDef { n: 3, cells: [p(1, 0), p(0, 1), p(1, 1), p(2, 1)], color: 13 }, // T
-    PieceDef { n: 3, cells: [p(1, 0), p(2, 0), p(0, 1), p(1, 1)], color: 10 }, // S
-    PieceDef { n: 3, cells: [p(0, 0), p(1, 0), p(1, 1), p(2, 1)], color: 9 },  // Z
-    PieceDef { n: 3, cells: [p(0, 0), p(0, 1), p(1, 1), p(2, 1)], color: 12 }, // J
-    PieceDef { n: 3, cells: [p(2, 0), p(0, 1), p(1, 1), p(2, 1)], color: 3 },  // L
+    PieceDef { n: 4, cells: [p(0, 1), p(1, 1), p(2, 1), p(3, 1)], color: 175 }, // I
+    PieceDef { n: 2, cells: [p(0, 0), p(1, 0), p(0, 1), p(1, 1)], color: 75 }, // O
+    PieceDef { n: 3, cells: [p(1, 0), p(0, 1), p(1, 1), p(2, 1)], color: 179 }, // T
+    PieceDef { n: 3, cells: [p(1, 0), p(2, 0), p(0, 1), p(1, 1)], color: 141 }, // S
+    PieceDef { n: 3, cells: [p(0, 0), p(1, 0), p(1, 1), p(2, 1)], color: 73 },  // Z
+    PieceDef { n: 3, cells: [p(0, 0), p(0, 1), p(1, 1), p(2, 1)], color: 107 }, // J
+    PieceDef { n: 3, cells: [p(2, 0), p(0, 1), p(1, 1), p(2, 1)], color: 167 }, // L
 ];
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
@@ -109,18 +109,22 @@ const BASE_M: i32 = 7;
 /// Hard mode has no walls: pieces can move out to |m| = M_WIDE, past the edge
 /// of the base, where they overhang or fall off.
 const M_WIDE: i32 = 15;
+/// Easy mode's well: columns × rows of square cells.
+pub const EASY_W: i32 = 12;
+pub const EASY_H: i32 = 22;
 
 impl Mode {
     pub fn geo(self) -> Geo {
         match self {
             Mode::Easy => Geo {
                 mode: self,
-                levels: 20,
-                radius: 5.0 * SQRT_2,
-                chord_y: -5.0,
-                half_w: 5.0,
-                well_half_w: 5.0,
-                well_top: 15.0,
+                levels: EASY_H,
+                // the arc spans ±45°, so its chord (the flat top) is r·√2 wide
+                radius: EASY_W as f64 / 2.0 * SQRT_2,
+                chord_y: -(EASY_W as f64) / 2.0,
+                half_w: EASY_W as f64 / 2.0,
+                well_half_w: EASY_W as f64 / 2.0,
+                well_top: (EASY_H - EASY_W / 2) as f64,
                 teeth_h: 0.0,
             },
             Mode::Advanced => {
@@ -147,7 +151,7 @@ impl Geo {
     }
     /// Number of storage slots in a row (the board is levels × slots).
     pub fn slots(&self) -> usize {
-        if self.diamond() { (M_WIDE + 1) as usize } else { 10 }
+        if self.diamond() { (M_WIDE + 1) as usize } else { EASY_W as usize }
     }
     /// Storage index (level, slot) of a lattice point, or None outside the well.
     pub fn index(&self, c: Pt) -> Option<(usize, usize)> {
@@ -158,7 +162,7 @@ impl Geo {
             }
             Some((k as usize, (m + M_WIDE).div_euclid(2) as usize))
         } else {
-            if c.x < 0 || c.x >= 10 || c.y < 0 || c.y >= self.levels {
+            if c.x < 0 || c.x >= EASY_W || c.y < 0 || c.y >= self.levels {
                 return None;
             }
             Some(((self.levels - 1 - c.y) as usize, c.x as usize))
@@ -184,7 +188,7 @@ impl Geo {
             let (k, m) = ((c.x + c.y) as f64, (c.x - c.y) as f64);
             v2(m / SQRT_2, self.chord_y + SQRT_2 / 2.0 + k / SQRT_2)
         } else {
-            v2(c.x as f64 - 4.5, self.chord_y + (self.levels - 1 - c.y) as f64 + 0.5)
+            v2(c.x as f64 - (EASY_W as f64 - 1.0) / 2.0, self.chord_y + (self.levels - 1 - c.y) as f64 + 0.5)
         }
     }
     /// Whether a cell lies over the base (hard mode: |m| ≤ 7). Only these
@@ -221,7 +225,7 @@ impl Geo {
             let (k, m) = (self.levels - 1 - (n - 1), -(n - 1));
             p((k + m) / 2, (k - m) / 2)
         } else {
-            p((10 - n) / 2, 0)
+            p((EASY_W - n) / 2, 0)
         }
     }
     /// Lowest levels never clear: the level that holds the teeth tips.
@@ -451,7 +455,7 @@ fn board_mass(base: Mass, b: &Board) -> Mass {
 fn evaluate(b: &Board, cleared: i64, mass: &Mass, peak: f64) -> i64 {
     let g = b.geo;
     // columns: x in easy mode, m in diamond mode
-    let ncol = if g.diamond() { (2 * M_WIDE + 1) as usize } else { 10 };
+    let ncol = if g.diamond() { (2 * M_WIDE + 1) as usize } else { EASY_W as usize };
     let col = |c: Pt| if g.diamond() { (c.x - c.y + M_WIDE) as usize } else { c.x as usize };
     let level = |c: Pt| if g.diamond() { c.x + c.y } else { g.levels - 1 - c.y };
     let mut top = vec![-1i32; ncol];
@@ -1259,7 +1263,7 @@ mod tests {
                     }
                 }
             }
-            let want = if mode == Mode::Easy { 200 } else { 14 * 15 + 13 * 16 };
+            let want = if mode == Mode::Easy { (EASY_W * EASY_H) as usize } else { 14 * 15 + 13 * 16 };
             assert_eq!(count, want, "{mode:?}");
         }
     }
@@ -1427,7 +1431,7 @@ mod tests {
     fn rows_easy_and_bands_diamond_clear() {
         // easy: a full bottom row clears
         let mut g = Game::new(1, Mode::Easy, false);
-        let row: Vec<Pt> = (0..10).map(|x| p(x, 19)).collect();
+        let row: Vec<Pt> = (0..EASY_W).map(|x| p(x, EASY_H - 1)).collect();
         fill(&mut g, &row);
         assert_eq!(g.board.clear_lines(), 1);
         // diamond: level 0 (teeth) never clears; levels 1 + 2 full clear as one band

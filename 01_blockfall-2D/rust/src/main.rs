@@ -11,11 +11,11 @@ use crossterm::{
     terminal::{self, ClearType},
 };
 
-const W: usize = 10;
-const H: usize = 20;
+const W: usize = 12;
+const H: usize = 22;
 const BOARD_X: u16 = 2;
 const BOARD_Y: u16 = 2;
-const PANEL_X: u16 = 27;
+const PANEL_X: u16 = 30;
 const LANG_NAME: &str = "[Rust]";
 const AI_STEP: Duration = Duration::from_millis(50);
 const TURBO_BUDGET: Duration = Duration::from_millis(15);
@@ -38,13 +38,13 @@ struct PieceDef {
 }
 
 const PIECES: [PieceDef; 7] = [
-    PieceDef { n: 4, cells: [p(0, 1), p(1, 1), p(2, 1), p(3, 1)], color: 14 }, // I
-    PieceDef { n: 2, cells: [p(0, 0), p(1, 0), p(0, 1), p(1, 1)], color: 11 }, // O
-    PieceDef { n: 3, cells: [p(1, 0), p(0, 1), p(1, 1), p(2, 1)], color: 13 }, // T
-    PieceDef { n: 3, cells: [p(1, 0), p(2, 0), p(0, 1), p(1, 1)], color: 10 }, // S
-    PieceDef { n: 3, cells: [p(0, 0), p(1, 0), p(1, 1), p(2, 1)], color: 9 },  // Z
-    PieceDef { n: 3, cells: [p(0, 0), p(0, 1), p(1, 1), p(2, 1)], color: 12 }, // J
-    PieceDef { n: 3, cells: [p(2, 0), p(0, 1), p(1, 1), p(2, 1)], color: 3 },  // L
+    PieceDef { n: 4, cells: [p(0, 1), p(1, 1), p(2, 1), p(3, 1)], color: 175 }, // I
+    PieceDef { n: 2, cells: [p(0, 0), p(1, 0), p(0, 1), p(1, 1)], color: 75 }, // O
+    PieceDef { n: 3, cells: [p(1, 0), p(0, 1), p(1, 1), p(2, 1)], color: 179 }, // T
+    PieceDef { n: 3, cells: [p(1, 0), p(2, 0), p(0, 1), p(1, 1)], color: 141 }, // S
+    PieceDef { n: 3, cells: [p(0, 0), p(1, 0), p(1, 1), p(2, 1)], color: 73 },  // Z
+    PieceDef { n: 3, cells: [p(0, 0), p(0, 1), p(1, 1), p(2, 1)], color: 107 }, // J
+    PieceDef { n: 3, cells: [p(2, 0), p(0, 1), p(1, 1), p(2, 1)], color: 167 }, // L
 ];
 
 const HELP: [&str; 9] = [
@@ -72,8 +72,8 @@ struct Theme {
 }
 
 const COLOUR_THEME: Theme = Theme {
-    block: "██", ghost: "░░", empty: " ·", tl: "┌", tr: "┐", bl: "└", br: "┘", horiz: "─", vert: "│",
-    dim: 245, text: 15, empty_col: 240, mono: false, block_mono: 0, ghost_mono: 0,
+    block: "██", ghost: "::", empty: " ·", tl: "┌", tr: "┐", bl: "└", br: "┘", horiz: "─", vert: "│",
+    dim: 245, text: 15, empty_col: 240, mono: false, block_mono: 0, ghost_mono: 245,
 };
 const RETRO_THEME: Theme = Theme {
     block: "[]", ghost: "::", empty: " .", tl: "+", tr: "+", bl: "+", br: "+", horiz: "-", vert: "|",
@@ -190,7 +190,7 @@ impl Game {
             lines: 0,
             paused: false,
             over: false,
-            retro: false,
+            retro: true,
             last_fall: now,
             ai,
             turbo: false,
@@ -629,7 +629,7 @@ fn render(g: &mut Game, s: &mut Screen, out: &mut impl Write) -> io::Result<()> 
     }
     if !g.over {
         let col = block_col(g.cur.kind);
-        let ghost_col = if th.mono { th.ghost_mono } else { col };
+        let ghost_col = th.ghost_mono; // the ghost is neutral, never the piece colour
         let gy = g.ghost_y();
         for c in g.cur.cells {
             cell(s, g.cur.x + c.x, gy + c.y, th.ghost, ghost_col);
@@ -639,16 +639,28 @@ fn render(g: &mut Game, s: &mut Screen, out: &mut impl Write) -> io::Result<()> 
         }
     }
 
-    s.put(PANEL_X, 3, "NEXT", white);
-    for c in PIECES[g.next].cells {
-        s.put(PANEL_X + c.x as u16 * 2, 4 + c.y as u16, th.block, fg(block_col(g.next)));
+    // the next piece sits in a framed box, its label in the top edge
+    s.put(PANEL_X, 3, th.tl, gray);
+    s.put(PANEL_X + 1, 3, " ON DECK", white);
+    s.put(PANEL_X + 9, 3, th.tr, gray);
+    for y in 4..=7 {
+        s.put(PANEL_X, y, th.vert, gray);
+        s.put(PANEL_X + 9, y, th.vert, gray);
     }
-    s.put(PANEL_X, 9, "SCORE", white);
-    s.put(PANEL_X, 10, &g.score.to_string(), plain);
+    s.put(PANEL_X, 8, th.bl, gray);
+    for i in 1..=8 {
+        s.put(PANEL_X + i, 8, th.horiz, gray);
+    }
+    s.put(PANEL_X + 9, 8, th.br, gray);
+    for c in PIECES[g.next].cells {
+        s.put(PANEL_X + 1 + c.x as u16 * 2, 4 + c.y as u16, th.block, fg(block_col(g.next)));
+    }
+    s.put(PANEL_X, 10, "SCORE", white);
+    s.put(PANEL_X, 11, &g.score.to_string(), plain);
     s.put(PANEL_X, 12, "LINES", white);
     s.put(PANEL_X, 13, &g.lines.to_string(), plain);
-    s.put(PANEL_X, 15, "LEVEL", white);
-    s.put(PANEL_X, 16, &g.level().to_string(), plain);
+    s.put(PANEL_X, 14, "LEVEL", white);
+    s.put(PANEL_X, 15, &g.level().to_string(), plain);
     for (i, h) in HELP.iter().enumerate() {
         s.put(PANEL_X, 18 + i as u16, h, gray);
     }
@@ -662,10 +674,10 @@ fn render(g: &mut Game, s: &mut Screen, out: &mut impl Write) -> io::Result<()> 
         s.put(x, row, txt, inv);
     };
     if g.over {
-        center(s, 12, " GAME OVER ");
-        center(s, 13, " R = restart ");
+        center(s, 13, " GAME OVER ");
+        center(s, 14, " R = restart ");
     } else if g.paused {
-        center(s, 12, " PAUSED ");
+        center(s, 13, " PAUSED ");
     }
     s.flush(out)
 }

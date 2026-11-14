@@ -29,7 +29,7 @@ The binary is `bin\blockfall-rocker.exe`. The user plays it themselves and repor
 ## Design decisions agreed with the user
 
 1. **GUI, not a terminal game.** Pieces are **glued to the base grid**. The arc is **90° (±45°)**. **Line clears are kept.**
-2. **Easy mode:** flat top, square 10×20 grid, R = 5√2. The stack **slides off at 30°**. The walls stay.
+2. **Easy mode:** flat top, square 12×22 grid, R = 6√2 (was 10×20, R = 5√2). The stack **slides off at 30°**. The walls stay.
 3. **Hard mode:** a 45° hacksaw top. **4 full teeth**, each flank 2 block-edges long, so the top is 8√2 ≈ 11.3 wide with a peak at each end. R = 8.
    - **Diamond blocks:** blocks are unit squares turned 45°, and pieces spawn already turned.
    - **Lattice:** in `Pt{x:a,y:b}`, level k = a+b (half-rows of √2/2) and horizontal position m = a−b. Over the base, |m| ≤ 7 (`BASE_M`). Pieces can move out to |m| ≤ 15 (`M_WIDE`).

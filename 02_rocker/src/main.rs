@@ -89,13 +89,13 @@ fn run_bench(seed: u32, mode: Mode, n: i64) {
 
 fn xterm(c: u8) -> Color {
     let (r, g, b) = match c {
-        14 => (0, 230, 255),
-        11 => (255, 225, 40),
-        13 => (220, 70, 255),
-        10 => (60, 230, 80),
-        9 => (255, 60, 60),
-        12 => (70, 110, 255),
-        3 => (230, 150, 30),
+        175 => (215, 135, 175), // I pink
+        75 => (95, 175, 255),   // O sky
+        179 => (215, 175, 95),  // T sand
+        141 => (175, 135, 255), // S lavender
+        73 => (95, 175, 175),   // Z teal
+        107 => (135, 175, 95),  // J olive
+        167 => (215, 95, 95),   // L brick
         _ => (200, 200, 200),
     };
     Color::from_rgba(r, g, b, 255)
@@ -111,6 +111,8 @@ const WOOD: Color = Color::new(0.55, 0.36, 0.18, 1.0);
 const WOOD_EDGE: Color = Color::new(0.80, 0.58, 0.32, 1.0);
 const DIM: Color = Color::new(0.55, 0.58, 0.65, 1.0);
 const TEXT: Color = Color::new(0.93, 0.94, 0.96, 1.0);
+/// The ghost is a neutral outline, never the piece colour.
+const GHOST: Color = Color::new(0.85, 0.87, 0.92, 0.6);
 const DANGER: Color = Color::new(1.0, 0.33, 0.30, 1.0);
 const OK: Color = Color::new(0.35, 0.85, 0.45, 1.0);
 
@@ -236,7 +238,7 @@ fn draw_cells(g: &Game, v: &View) {
     match g.landing() {
         Some(ghost) => {
             for c in g.cells_of(&g.cur.spec, ghost) {
-                outline(&block_on_base(g, v, c, 0.9), 1.5, Color::new(col.r, col.g, col.b, 0.55));
+                outline(&block_on_base(g, v, c, 0.9), 1.5, GHOST);
             }
         }
         None => {
@@ -328,11 +330,12 @@ fn draw_panel(g: &Game, x: f32) {
     }
 
     y += 40.0;
-    draw_text("NEXT", x, y, 22.0, DIM);
+    draw_text("ON DECK", x, y, 22.0, DIM);
     let d = &PIECES[g.next];
     let s = 20.0f64;
     let angle = g.geo().cell_angle();
-    let (cx, cy) = (x as f64 + 70.0, y as f64 + 45.0);
+    let (cx, cy) = (x as f64 + 140.0, y as f64 + 45.0);
+    draw_rectangle_lines(cx as f32 - 45.0, cy as f32 - 45.0, 90.0, 90.0, 1.5, DIM);
     let mid = (d.n as f64 - 1.0) / 2.0;
     for c in d.cells {
         // screen y grows downward: turning counter-clockwise on screen is -angle

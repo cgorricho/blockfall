@@ -39,52 +39,35 @@ The game starts right away. The top line shows which language you're running: `[
 
 ## 3. The screen
 
+The game starts in **retro mode**: green characters on a black screen, every block drawn as `[]`.
+
 ```
    B L O C K F A L L  [Go]
 
-  ┌────────────────────┐
-  │ · · · · · · · · · ·│   NEXT          <- the piece that comes after this one
-  │ · · · ·████ · · · ·│   ████
-  │ · · ·████ · · · · ·│     ████
-  │ · · · · · · · · · ·│
-  │        ...         │   SCORE
-  │ · · · · · · · · · ·│   0
-  │ · · · ·░░░░ · · · ·│   LINES         <- ░░ = where the piece will land
-  │ · · ·░░░░ · · · · ·│   0
-  └────────────────────┘   LEVEL 1
+  +------------------------+  + ON DECK+     <- the piece that comes after this one
+  | . . . . . . . . . . . .|  |[][][][]|
+  | . . . . .[][] . . . . .|  |        |
+  | . . . . .[][] . . . . .|  +--------+
+  | . . . . . . . . . . . .|
+  |          ...           |  SCORE
+  | . . . . .:::: . . . . .|  0             <- :: = where the piece will land
+  |[][][] . . . .[][][][][]|  LINES
+  +------------------------+  0
 ```
 
 | Symbol | Meaning |
 |--------|---------|
-| `██` | A block: the falling piece, or a piece that has already landed |
-| `░░` | Shadow: where the falling piece will land if you drop it |
-| ` ·` | An empty cell |
-
-The well is **10 columns wide and 20 rows tall**.
-
-### Retro mode (press F)
-
-Press **F** to switch to a plain text look: green characters on a black screen, with every block drawn as `[]`. Press **F** again to go back to colour.
-
-```
-  +--------------------+
-  | . . . . . . . . . .|   NEXT
-  | . . . .[][] . . . .|   [][][][]
-  | . . . .[][] . . . .|
-  | . . . . . . . . . .|
-  |        ...         |
-  | . . . .:::: . . . .|   <- :: = where the piece will land
-  |[][][] . . .[][][][]|
-  +--------------------+
-```
-
-| Symbol | Meaning |
-|--------|---------|
-| `[]` | A block |
-| `::` | Shadow: where the falling piece will land |
+| `[]` | A block: the falling piece, or a piece that has already landed |
+| `::` | Shadow: where the falling piece will land if you drop it |
 | ` .` | An empty cell |
 
-For example, the long piece is `[][][][]` and the square is two rows of `[][]`. Your score, the board and the current piece all stay the same when you switch, and the game keeps the mode when you restart with **R**.
+The well is **12 columns wide and 22 rows tall**.
+
+### Colour mode (press F)
+
+Press **F** to switch to colour: each piece gets its own muted colour (pink, sky, sand, lavender, teal, olive, brick), blocks are drawn as `██`, and the shadow is a gray `::`. Press **F** again to go back to retro.
+
+Your score, the board and the current piece all stay the same when you switch, and the game keeps the mode when you restart with **R**.
 
 ---
 
@@ -100,7 +83,7 @@ For example, the long piece is `[][][][]` and the square is two rows of `[][]`. 
 | **Space** | Hard drop: drop to the bottom at once (+2 points per row) |
 | **P** | Pause / resume |
 | **R** | Restart (works at any time) |
-| **F** | Switch between colour mode and retro mode (works at any time) |
+| **F** | Switch between retro mode (the default) and colour mode (works at any time) |
 | **Q** or **Esc** | Quit |
 
 **Rotating next to a wall:** if a rotation would push the piece into a wall or another block, the game tries shifting it up to 2 columns left or right so the rotation still works.
@@ -138,8 +121,8 @@ Extra points:
 
 ## 7. Tips
 
-- **Watch the shadow (`░░`).** It shows exactly where the piece will land, so you can line it up and hard-drop.
-- **Check NEXT** to plan where the following piece will go.
+- **Watch the shadow (`::`).** It shows exactly where the piece will land, so you can line it up and hard-drop.
+- **Check ON DECK** to plan where the following piece will go.
 - **Keep the surface flat**, and leave one column open at the side for the long 4-block piece. It clears 4 rows at once for the biggest score.
 - **Clearing several rows at once pays off.** 4 rows together gives 800 points; 4 single rows give only 400.
 

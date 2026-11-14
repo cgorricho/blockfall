@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
-const int W = 10, H = 20, BoardX = 2, BoardY = 2, PanelX = 27;
+const int W = 12, H = 22, BoardX = 2, BoardY = 2, PanelX = 30;
 const string LangName = "[C#]";
 
 // ---------- command line ----------
@@ -114,27 +114,34 @@ static void Render(Game g, Screen s)
     if (!g.Over)
     {
         int col = BlockCol(g.Cur.Kind);
-        int ghostCol = th.Mono ? th.GhostMono : col;
+        int ghostCol = th.GhostMono; // the ghost is neutral, never the piece colour
         int gy = g.GhostY();
         foreach (var c in g.Cur.Cells) Cell(g.Cur.X + c.X, gy + c.Y, th.Ghost, ghostCol);
         foreach (var c in g.Cur.Cells) Cell(g.Cur.X + c.X, g.Cur.Y + c.Y, th.Block, col);
     }
 
-    s.Put(PanelX, 3, "NEXT", white);
-    foreach (var c in Game.Pieces[g.Next].Cells) s.Put(PanelX + c.X * 2, 4 + c.Y, th.Block, Fg(BlockCol(g.Next)));
-    s.Put(PanelX, 9, "SCORE", white);
-    s.Put(PanelX, 10, g.Score.ToString(), plain);
+    // the next piece sits in a framed box, its label in the top edge
+    s.Put(PanelX, 3, th.TL, gray);
+    s.Put(PanelX + 1, 3, " ON DECK", white);
+    s.Put(PanelX + 9, 3, th.TR, gray);
+    for (int y = 4; y <= 7; y++) { s.Put(PanelX, y, th.Vert, gray); s.Put(PanelX + 9, y, th.Vert, gray); }
+    s.Put(PanelX, 8, th.BL, gray);
+    for (int i = 1; i <= 8; i++) s.Put(PanelX + i, 8, th.Horiz, gray);
+    s.Put(PanelX + 9, 8, th.BR, gray);
+    foreach (var c in Game.Pieces[g.Next].Cells) s.Put(PanelX + 1 + c.X * 2, 4 + c.Y, th.Block, Fg(BlockCol(g.Next)));
+    s.Put(PanelX, 10, "SCORE", white);
+    s.Put(PanelX, 11, g.Score.ToString(), plain);
     s.Put(PanelX, 12, "LINES", white);
     s.Put(PanelX, 13, g.Lines.ToString(), plain);
-    s.Put(PanelX, 15, "LEVEL", white);
-    s.Put(PanelX, 16, g.Level.ToString(), plain);
+    s.Put(PanelX, 14, "LEVEL", white);
+    s.Put(PanelX, 15, g.Level.ToString(), plain);
     string[] help = { "←→  move", "↑ X rotate", "Z   rotate ccw", "↓   soft drop", "SPC hard drop", "P   pause", "R   restart", "F   retro mode", "Q   quit" };
     for (int i = 0; i < help.Length; i++) s.Put(PanelX, 18 + i, help[i], gray);
     if (g.Ai) s.Put(PanelX, 27, "T   ai turbo", gray);
 
     void Center(int row, string txt) => s.Put(BoardX + 1 + (W * 2 - txt.Length) / 2, row, txt, plain with { Bold = true, Reverse = true });
-    if (g.Over) { Center(12, " GAME OVER "); Center(13, " R = restart "); }
-    else if (g.Paused) Center(12, " PAUSED ");
+    if (g.Over) { Center(13, " GAME OVER "); Center(14, " R = restart "); }
+    else if (g.Paused) Center(13, " PAUSED ");
 
     s.Flush();
 }
@@ -147,7 +154,7 @@ record struct Style(int Fg, bool Bold = false, bool Reverse = false, int Bg = -1
 record Theme(string Block, string Ghost, string Empty, string TL, string TR, string BL, string BR, string Horiz, string Vert,
              int Dim, int Text, int EmptyCol, bool Mono, int BlockMono, int GhostMono)
 {
-    public static readonly Theme Colour = new("██", "░░", " ·", "┌", "┐", "└", "┘", "─", "│", 245, 15, 240, false, 0, 0);
+    public static readonly Theme Colour = new("██", "::", " ·", "┌", "┐", "└", "┘", "─", "│", 245, 15, 240, false, 0, 245);
     public static readonly Theme Retro = new("[]", "::", " .", "+", "+", "+", "+", "-", "|", 28, 10, 28, true, 10, 28);
 }
 
@@ -162,19 +169,19 @@ record struct AiPlan(int Rots, int X, bool Ok);
 
 class Game
 {
-    public const int W = 10, H = 20;
+    public const int W = 12, H = 22;
     const int AiStepMs = 50, TurboBudgetMs = 15;
     static readonly int[] Kicks = { 0, -1, 1, -2, 2 };
 
     public static readonly PieceDef[] Pieces =
     {
-        new(4, new Pt[] { new(0, 1), new(1, 1), new(2, 1), new(3, 1) }, 14), // I
-        new(2, new Pt[] { new(0, 0), new(1, 0), new(0, 1), new(1, 1) }, 11), // O
-        new(3, new Pt[] { new(1, 0), new(0, 1), new(1, 1), new(2, 1) }, 13), // T
-        new(3, new Pt[] { new(1, 0), new(2, 0), new(0, 1), new(1, 1) }, 10), // S
-        new(3, new Pt[] { new(0, 0), new(1, 0), new(1, 1), new(2, 1) }, 9),  // Z
-        new(3, new Pt[] { new(0, 0), new(0, 1), new(1, 1), new(2, 1) }, 12), // J
-        new(3, new Pt[] { new(2, 0), new(0, 1), new(1, 1), new(2, 1) }, 3),  // L
+        new(4, new Pt[] { new(0, 1), new(1, 1), new(2, 1), new(3, 1) }, 175), // I
+        new(2, new Pt[] { new(0, 0), new(1, 0), new(0, 1), new(1, 1) }, 75), // O
+        new(3, new Pt[] { new(1, 0), new(0, 1), new(1, 1), new(2, 1) }, 179), // T
+        new(3, new Pt[] { new(1, 0), new(2, 0), new(0, 1), new(1, 1) }, 141), // S
+        new(3, new Pt[] { new(0, 0), new(1, 0), new(1, 1), new(2, 1) }, 73),  // Z
+        new(3, new Pt[] { new(0, 0), new(0, 1), new(1, 1), new(2, 1) }, 107), // J
+        new(3, new Pt[] { new(2, 0), new(0, 1), new(1, 1), new(2, 1) }, 167), // L
     };
 
     public int[,] Board = new int[H, W];
@@ -182,7 +189,7 @@ class Game
     public int Next;
     public long Score, Lines;
     public bool Paused, Over;
-    public bool Retro; // F: monochrome green "[]" rendering
+    public bool Retro = true; // F: monochrome green "[]" rendering (the default)
     public Stopwatch SinceFall = new();
     readonly List<int> bag = new();
     uint rng;

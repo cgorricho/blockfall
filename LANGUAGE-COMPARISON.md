@@ -11,7 +11,7 @@ BLOCKFALL was built three times with the same rules ([SPEC.md](SPEC.md)): in Go,
   .\bin\blockfall-<go|cs|rs>.exe --bench 50000 --seed 42
   ```
 - **Runs:** 3 per build, on the same Windows 11 PC (2026-11-11).
-- **Same game in all three:** every build printed `lines=19829 score=764094 games=11`, so they did exactly the same work.
+- **Same game in all three:** every build printed `lines=19829 score=764094 games=11`, so they did exactly the same work. (Measured on the old 10×20 board. The board is now 12×22, so a rerun prints different totals, though still the same in all three.)
 
 ## Results
 
