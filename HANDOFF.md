@@ -13,6 +13,7 @@ An original falling-block game, built several ways:
 | `02_rocker/` | Spin-off: Rust + macroquad GUI, pieces on a rocking base with rolling physics | `bin\blockfall-rocker.exe` |
 | `03_tower-3D/` | Spin-off: Rust + macroquad, the board wrapped round a 3D cylinder | `bin\blockfall-tower3d.exe` |
 | `04_rocker-tower/` | Spin-off: the tower-3D cylinder on a rocking spherical base, a full 3D rolling rigid body (Rocker's physics in 3D) | `bin\blockfall-rocker-tower.exe` |
+| `05_cube-3D/` | Spin-off: a 6×6 (default) or 9×9 well, 16 deep; the base turns 90° about z (A/D); pieces move in 2 horizontal directions, rotate about x/y/z, a full layer clears. Started 2026-11-13 | `bin\blockfall-cube3d.exe` |
 
 Scripts: `build.ps1` at the root builds every project into the shared root `bin\`. In `01_blockfall-2D\`: `play-ai.ps1` (three AI games side by side + dashboard), `measure.ps1` (CPU/IO over a window), `disasm.ps1` (assembly listings).
 

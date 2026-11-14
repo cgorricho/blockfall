@@ -1,5 +1,5 @@
 # Builds every BLOCKFALL project into .\bin:
-#   01_blockfall-2D (Go, C#, Rust editions + dashboard), 02_rocker, 03_tower-3D, 04_rocker-tower
+#   01_blockfall-2D (Go, C#, Rust editions + dashboard), 02_rocker, 03_tower-3D, 04_rocker-tower, 05_cube-3D
 $ErrorActionPreference = 'Stop'
 $root = $PSScriptRoot
 $twoD = Join-Path $root '01_blockfall-2D'
@@ -43,6 +43,12 @@ Write-Host '== Rocker-Tower' -ForegroundColor Cyan
 Push-Location (Join-Path $root '04_rocker-tower')
 cargo build --release
 Copy-Item (Join-Path $root '04_rocker-tower\target\release\blockfall-rocker-tower.exe') (Join-Path $bin 'blockfall-rocker-tower.exe') -Force
+Pop-Location
+
+Write-Host '== Cube-3D' -ForegroundColor Cyan
+Push-Location (Join-Path $root '05_cube-3D')
+cargo build --release
+Copy-Item (Join-Path $root '05_cube-3D\target\release\blockfall-cube3d.exe') (Join-Path $bin 'blockfall-cube3d.exe') -Force
 Pop-Location
 
 Write-Host '== Dashboard' -ForegroundColor Cyan

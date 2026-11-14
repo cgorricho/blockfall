@@ -2,7 +2,7 @@
 
 BLOCKFALL uses the free rules of falling-block puzzles (pieces fall, rotate, full lines clear), but none of another game's look. Copyright doesn't protect game rules. It does protect a game's look: *Tetris Holding v. Xio Interactive* (D.N.J. 2012) found that the exact 10×20 board, the style and colours of the pieces, and the look of the ghost piece, the next-piece preview, garbage lines, the colour flash on lock and the board-fill at game over were all protected. Keep it that way in every edition:
 
-- **Board:** never 10×20. The terminal and Rocker easy wells are 12×22. The towers are rings of 16/24/32 columns, 20 rows tall.
+- **Board:** never 10×20. The terminal and Rocker easy wells are 12×22. The towers are rings of 16/24/32 columns, 20 rows tall. The cube well is 6×6 or 9×9 across and 16 deep.
 - **Colours:** BLOCKFALL's own muted palette (I pink, O sky, T sand, S lavender, Z teal, J olive, L brick; indices in SPEC.md). Never the cyan/yellow/purple/green/red/blue/orange mapping.
 - **Ghost:** a neutral outline (`::` in gray, or a gray wire outline in the GUI editions), never a faded copy of the piece.
 - **Preview:** the framed "ON DECK" box, not a bare "NEXT" panel.

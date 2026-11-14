@@ -8,6 +8,7 @@ An original falling-block puzzle game, built several ways. Each project has its 
 | [02_rocker/](02_rocker/README.md) | **BLOCKFALL ROCKER**: the same pieces stacked on a rocking base with real rolling physics; you lose if the stack slides off | Rust + [macroquad](https://macroquad.rs) | `bin\blockfall-rocker.exe` |
 | [03_tower-3D/](03_tower-3D/README.md) | **BLOCKFALL TOWER-3D**: the board wrapped around a 3D cylinder | Rust + macroquad | `bin\blockfall-tower3d.exe` |
 | [04_rocker-tower/](04_rocker-tower/README.md) | **BLOCKFALL ROCKER-TOWER**: the tower-3D cylinder on a rocking spherical base; Rocker's rolling physics as a full 3D rigid body | Rust + macroquad | `bin\blockfall-rocker-tower.exe` |
+| [05_cube-3D/](05_cube-3D/README.md) | **BLOCKFALL CUBE-3D**: a 16-deep well on a 6 x 6 or 9 x 9 base; pieces rotate about x, y and z, and a full layer clears | Rust + macroquad | `bin\blockfall-cube3d.exe` |
 
 ## Docs in this folder
 
